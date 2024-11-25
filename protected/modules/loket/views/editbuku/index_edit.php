@@ -32,7 +32,7 @@
     <div class="col-lg-12">
         <?php echo CHtml::beginForm('', 'post', array('class' => 'form-horizontal', 'id' => 'FORMINPUT')); ?>
         <div class="col-md-12" style="margin-bottom: 10px">
-            <button type="button" disabled="true" class="btn btn-primary button_simpan pull-right" onclick="submitForm('<?php echo $this->createUrl('Editbuku/SaveForm'); ?>')">SIMPAN</button>
+            <button type="button" class="btn btn-primary button_simpan pull-right" onclick="submitForm('<?php echo $this->createUrl('Editbuku/SaveForm'); ?>')">SIMPAN</button>
         </div>
         <section class="col-md-4">
             <div class="box box-info">
@@ -101,7 +101,7 @@
                         <div class="col-md-12 no-margin no-padding">
                             <label for="nomer_uji">Nomor Uji</label>
                             <?php
-                            echo CHtml::hiddenField('id_kendaraan', '', array('class' => 'form-control text-besar'));
+                            echo CHtml::hiddenField('id_kendaraan', '0', array('class' => 'form-control text-besar'));
                             echo CHtml::textField('nomer_uji', '', array('class' => 'form-control wajib-isi text-besar', 'required' => 'true'));
                             ?>
                         </div>
@@ -728,7 +728,7 @@
             </div>
             <!--KEMAMPUAN KENDARAAN-->
             <div class="col-md-12 no-padding">
-                <button type="button" disabled="true" class="btn btn-primary button_simpan pull-right" onclick="submitForm('<?php echo $this->createUrl('Editbuku/SaveForm'); ?>')">SIMPAN</button>
+                <button type="button" class="btn btn-primary button_simpan pull-right" onclick="submitForm('<?php echo $this->createUrl('Editbuku/SaveForm'); ?>')">SIMPAN</button>
             </div>
         </section>
         <?php echo CHtml::endForm(); ?>
