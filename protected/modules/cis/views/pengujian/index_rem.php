@@ -7,9 +7,10 @@ $cs->registerScriptFile($assetsUrl . '/js/rem.js', CClientScript::POS_END);
 $cs->registerScriptFile($assetsUrl . '/js/jquery.numeric.js', CClientScript::POS_END);
 ?>
 <style>
-    .datagrid-row{
+    .datagrid-row {
         height: 40px !important;
     }
+
     .datagrid-cell-c9-no_kendaraan {
         font-weight: bold !important;
         font-size: 12pt !important;
@@ -42,158 +43,224 @@ $cs->registerScriptFile($assetsUrl . '/js/jquery.numeric.js', CClientScript::POS
             </div><!-- /.box-header -->
             <div class="box-body">
                 <div class="row" style="margin-bottom: 20px">
-                        <div class="col-lg-2 col-md-2">
-                            <input type="hidden" id="no_antrian_rem" class="form-control" placeholder="NO ANTRIAN" readonly="readonly" style="font-weight: bold;"/>
-                            <input type="hidden" value="biasa" readonly="readonly" id="text_category_rem" />
-                            <input type="hidden" id="username_rem" readonly="readonly" value="<?php echo Yii::app()->session['username']; ?>"/>
-                            <input type="hidden" id="id_hasil_uji_rem" readonly="readonly"/>
-                            <input type="hidden" id="tahun_rem" readonly="readonly"/>
-                            <input type="hidden" id="posisi_cis_rem" readonly="readonly" value="<?php echo Yii::app()->session['posisi_cis']; ?>"/>
-                            <input type="text" id="no_kendaraan_rem" class="form-control" placeholder="NO KEND" readonly="readonly" />
-                        </div>
-                        <div class="col-lg-2 col-md-2">
-                            <input type="text" id="no_uji_rem" class="form-control" placeholder="NO UJI" readonly="readonly" />
-                        </div>
-                        <div class="col-lg-3 col-md-4">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-warning" onclick="reloadDataRem('<?php echo $this->createUrl('Rem/ReloadData'); ?>')">RELOAD</button>
-                                <button type="button" class="btn btn-primary" onclick="prosesRem('<?php echo $this->createUrl('Rem/Proses'); ?>')">PROSES</button>
-                            </div>
+                    <div class="col-lg-2 col-md-2">
+                        <input type="hidden" id="no_antrian_rem" class="form-control" placeholder="NO ANTRIAN" readonly="readonly" style="font-weight: bold;" />
+                        <input type="hidden" value="biasa" readonly="readonly" id="text_category_rem" />
+                        <input type="hidden" id="username_rem" readonly="readonly" value="<?php echo Yii::app()->session['username']; ?>" />
+                        <input type="hidden" id="id_hasil_uji_rem" readonly="readonly" />
+                        <input type="hidden" id="tahun_rem" readonly="readonly" />
+                        <input type="hidden" id="posisi_cis_rem" readonly="readonly" value="<?php echo Yii::app()->session['posisi_cis']; ?>" />
+                        <input type="text" id="no_kendaraan_rem" class="form-control" placeholder="NO KEND" readonly="readonly" />
+                    </div>
+                    <div class="col-lg-2 col-md-2">
+                        <input type="text" id="no_uji_rem" class="form-control" placeholder="NO UJI" readonly="readonly" />
+                    </div>
+                    <div class="col-lg-3 col-md-4">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-warning" onclick="reloadDataRem('<?php echo $this->createUrl('Rem/ReloadData'); ?>')">RELOAD</button>
+                            <button type="button" class="btn btn-primary" onclick="prosesRem('<?php echo $this->createUrl('Rem/Proses'); ?>')">PROSES</button>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12 col-lg-12">
-                    <table width="100%">
-                        <tr>
-                            <td width="10%">&nbsp;</td>
-                            <td colspan="2"><b>GAYA REM</b></td>
-                            <td colspan="2"><b>SELISIH REM</b></td>
-                        </tr>
-                        <tr>
-                            <td width="30%"><b>SUMBU I</b></td>
-                            <td width="20%">
-                                <div class="input-group">
-                                    <input class="form-control" type="text" id="bsb1" size="8" maxlength="8"/>
-                                    <div class="input-group-addon">%</div>
-                                </div>
-                            </td>
-                            <td width="10%">&nbsp;&nbsp;&nbsp;Min = 50 %</td>
-                            <td width="20%">
-                                <div class="input-group">
-                                    <input class="form-control" type="text" id="bsel1" size="8" maxlength="8"/>
-                                    <div class="input-group-addon">%</div>
-                                </div>
-                            </td>
-                            <td width="10%">&nbsp;&nbsp;&nbsp;Max = 8 %</td>
-                            <td width="30%">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td><b>SUMBU II</b></td>
-                            <td>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" id="bsb2" size="8" maxlength="8"/>
-                                    <div class="input-group-addon">%</div>
-                                </div>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;Min = 50 %</td>
-                            <td>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" id="bsel2" size="8" maxlength="8"/>
-                                    <div class="input-group-addon">%</div>
-                                </div>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;Max = 8 %</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td><b>SUMBU III</b></td>
-                            <td>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" id="bsb3" size="8" maxlength="8"/>
-                                    <div class="input-group-addon">%</div>
-                                </div>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;Min = 50 %</td>
-                            <td>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" id="bsel3" size="8" maxlength="8"/>
-                                    <div class="input-group-addon">%</div>
-                                </div>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;Max = 8 %</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td><b>SUMBU IV</b></td>
-                            <td>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" id="bsb4" size="8" maxlength="8"/>
-                                    <div class="input-group-addon">%</div>
-                                </div>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;Min = 50 %</td>
-                            <td>
-                                <div class="input-group">
-                                    <input class="form-control" type="text" id="bsel4" size="8" maxlength="8"/>
-                                    <div class="input-group-addon">%</div>
-                                </div>
-                            </td>
-                            <td>&nbsp;&nbsp;&nbsp;Max = 8 %</td>
-                            <td>&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td colspan="5">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>Berat sumbu I</td>
-                            <td>
-                                <label>
-                                    <input id="um21" type="checkbox" class="flat-red"> Tidak Sesuai STUK
-                                </label>
-                            </td>
-                            <td colspan="4">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>Berat sumbu II</td>
-                            <td>
-                                <label>
-                                    <input id="um22" type="checkbox" class="flat-red"> Tidak Sesuai STUK
-                                </label>
-                            </td>
-                            <td colspan="4">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>Berat sumbu III</td>
-                            <td>
-                                <label>
-                                    <input id="um23" type="checkbox" class="flat-red"> Tidak Sesuai STUK
-                                </label>
-                            </td>
-                            <td colspan="4">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>Berat sumbu IV</td>
-                            <td>
-                                <label>
-                                    <input id="um24" type="checkbox" class="flat-red"> Tidak Sesuai STUK
-                                </label>
-                            </td>
-                            <td colspan="4">&nbsp;</td>
-                        </tr>
-                        <tr>
-                            <td>Efisiensi rem parkir kurang dari 17 %</td>
-                            <td>
-                                <label>
-                                    <input id="um33" type="checkbox" class="flat-red"> Ya
-                                </label>
-                            </td>
-                            <td colspan="4">&nbsp;</td>
-                        </tr>
-                    </table>
-                </div>
+            </div>
+            <div class="col-md-12 col-lg-12">
+                <table width="100%">
+                    <tr>
+                        <td width="10%"></td>
+                        <td>KIRI</td>
+                        <td width="18"></td>
+                        <td>KANAN</td>
+                        <td width="18"></td>
+                        <td>GAYA REM (%)</td>
+                        <td></td>
+                        <td></td>
+                        <td>SELISIH REM (%)</td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>1. SUMBU I </td>
+                        <td>
+                            <input type="hidden" id="bsumbu1" />
+                            <div class="input-group">
+                                <input onkeyup="perhitungan()" style="background-color: #ddd" readonly="readonly" class="form-control" type="text" id="bsb1kr" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">Kg</div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td>
+                            <div class="input-group">
+                                <input onkeyup="perhitungan()" style="background-color: #ddd" readonly="readonly" class="form-control" type="text" id="bsb1kn" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">Kg</div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td>
+                            <div class="input-group">
+                                <input style="background-color: #ddd" readonly="readonly" class="form-control" type="text" id="bsb1" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </td>
+                        <td>Max = 100 %</td>
+                        <td></td>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" style="background-color: #ddd" readonly="readonly" type="text" id="bsel1" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </td>
+                        <td>Max = 8 %</td>
+                    </tr>
+                    <tr>
+                        <td>2. SUMBU II </td>
+                        <td>
+                            <input type="hidden" id="bsumbu2" />
+                            <div class="input-group">
+                                <input onkeyup="perhitungan()" style="background-color: #ddd" readonly="readonly" class="form-control" type="text" id="bsb2kr" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">Kg</div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td>
+                            <div class="input-group">
+                                <input onkeyup="perhitungan()" style="background-color: #ddd" readonly="readonly" class="form-control" type="text" id="bsb2kn" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">Kg</div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td>
+                            <div class="input-group">
+                                <input style="background-color: #ddd" readonly="readonly" class="form-control" type="text" id="bsb2" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </td>
+                        <td>Max = 100 %</td>
+                        <td></td>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" style="background-color: #ddd" readonly="readonly" type="text" id="bsel2" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </td>
+                        <td>Max = 8 %</td>
+                    </tr>
+                    <tr>
+                        <td>3. SUMBU III </td>
+                        <td>
+                            <input type="hidden" id="bsumbu3" />
+                            <div class="input-group">
+                                <input onkeyup="perhitungan()" style="background-color: #ddd" readonly="readonly" class="form-control" type="text" id="bsb3kr" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">Kg</div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td>
+                            <div class="input-group">
+                                <input onkeyup="perhitungan()" style="background-color: #ddd" readonly="readonly" class="form-control" type="text" id="bsb3kn" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">Kg</div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td>
+                            <div class="input-group">
+                                <input style="background-color: #ddd" readonly="readonly" class="form-control" type="text" id="bsb3" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </td>
+                        <td>Max = 100 %</td>
+                        <td></td>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" style="background-color: #ddd" readonly="readonly" type="text" id="bsel3" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </td>
+                        <td>Max = 8 %</td>
+                    </tr>
+                    <tr>
+                        <td>4. SUMBU IV </td>
+                        <td>
+                            <input type="hidden" id="bsumbu4" />
+                            <div class="input-group">
+                                <input onkeyup="perhitungan()" style="background-color: #ddd" readonly="readonly" class="form-control" type="text" id="bsb4kr" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">Kg</div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td>
+                            <div class="input-group">
+                                <input onkeyup="perhitungan()" style="background-color: #ddd" readonly="readonly" class="form-control" type="text" id="bsb4kn" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">Kg</div>
+                            </div>
+                        </td>
+                        <td></td>
+                        <td>
+                            <div class="input-group">
+                                <input style="background-color: #ddd" readonly="readonly" class="form-control" type="text" id="bsb4" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </td>
+                        <td>Max = 100 %</td>
+                        <td></td>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" style="background-color: #ddd" readonly="readonly" type="text" id="bsel4" value="" size="8" maxlength="8" />
+                                <div class="input-group-addon">%</div>
+                            </div>
+                        </td>
+                        <td>Max = 8 %</td>
+                    </tr>
+                    <tr>
+                        <td colspan="10">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Berat S-I</td>
+                        <td colspan="2">
+                            <label>
+                                <input id="um21" type="checkbox" class="flat-red"> Tidak Sesuai STUK
+                            </label>
+                        </td>
+                        <td colspan="7">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Berat S-II</td>
+                        <td colspan="2">
+                            <label>
+                                <input id="um22" type="checkbox" class="flat-red"> Tidak Sesuai STUK
+                            </label>
+                        </td>
+                        <td colspan="7">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Berat S-III</td>
+                        <td colspan="2">
+                            <label>
+                                <input id="um23" type="checkbox" class="flat-red"> Tidak Sesuai STUK
+                            </label>
+                        </td>
+                        <td colspan="7">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Berat S-IV</td>
+                        <td colspan="2">
+                            <label>
+                                <input id="um24" type="checkbox" class="flat-red"> Tidak Sesuai STUK
+                            </label>
+                        </td>
+                        <td colspan="7">&nbsp;</td>
+                    </tr>
+                    <tr>
+                        <td>Rem parkir</td>
+                        <td colspan="2">
+                            <label>
+                                <input id="um33" type="checkbox" class="flat-red"> Tidak Berfungsi
+                            </label>
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <script>
@@ -212,36 +279,201 @@ $cs->registerScriptFile($assetsUrl . '/js/jquery.numeric.js', CClientScript::POS
         pageNumber: 1,
         pageSize: 5,
         pageList: [5, 10, 20],
-        columns: [[
-                {field: 'id_hasil_uji', title: '', hidden: true},
-                {field: 'id_jns_kend', title: '', hidden: true},
-//                {field: 'numerator', width: 100, title: 'Numerator', sortable: true},
-//                {field: 'numerator_hari', width: 100, title: 'Numerator', sortable: true},
-                {field: 'nm_uji', title: 'Jenis Uji', width: 120, sortable: false, align: 'center'},
-//                {field: 'no_antrian', width: 100, title: 'No Antrian', sortable: false},
-                {field: 'no_kendaraan', width: 100, title: 'No Kendaraan', sortable: false},
-                {field: 'no_uji', title: 'No Uji', width: 120, sortable: false},
-                {field: 'merk', title: 'Merk', width: 95, sortable: false},
-                {field: 'tipe', title: 'Tipe', width: 80, sortable: false},
-                {field: 'nm_komersil', title: 'Komersil', width: 130, sortable: false},
-                {field: 'tahun', title: 'Tahun', width: 70, sortable: false, align: 'center'},
-                {field: 'konsumbu', title: 'CNF.S', width: 70, sortable: false, align: 'center'},
-                {field: 'bsumbu1', title: 'S I', width: 70, sortable: false, align: 'center'},
-                {field: 'bsumbu2', title: 'S II', width: 70, sortable: false, align: 'center'},
-                {field: 'bsumbu3', title: 'S III', width: 70, sortable: false, align: 'center'},
-                {field: 'bsumbu4', title: 'S IV', width: 70, sortable: false, align: 'center'},
-            ]],
+        columns: [
+            [{
+                    field: 'id_kendaraan',
+                    title: '',
+                    hidden: true
+                },
+                {
+                    field: 'id_hasil_uji',
+                    title: '',
+                    hidden: true
+                },
+                {
+                    field: 'id_jns_kend',
+                    title: '',
+                    hidden: true
+                },
+                //                {field: 'numerator', width: 100, title: 'Numerator', sortable: true},
+                //                {field: 'numerator_hari', width: 100, title: 'Numerator', sortable: true},
+                {
+                    field: 'nm_uji',
+                    title: 'Jenis Uji',
+                    width: 120,
+                    sortable: false,
+                    align: 'center'
+                },
+                //                {field: 'no_antrian', width: 100, title: 'No Antrian', sortable: false},
+                {
+                    field: 'no_kendaraan',
+                    width: 100,
+                    title: 'No Kendaraan',
+                    sortable: false
+                },
+                {
+                    field: 'no_uji',
+                    title: 'No Uji',
+                    width: 120,
+                    sortable: false
+                },
+                {
+                    field: 'merk',
+                    title: 'Merk',
+                    width: 95,
+                    sortable: false
+                },
+                {
+                    field: 'tipe',
+                    title: 'Tipe',
+                    width: 80,
+                    sortable: false
+                },
+                {
+                    field: 'nm_komersil',
+                    title: 'Komersil',
+                    width: 130,
+                    sortable: false
+                },
+                {
+                    field: 'tahun',
+                    title: 'Tahun',
+                    width: 70,
+                    sortable: false,
+                    align: 'center'
+                },
+                {
+                    field: 'konsumbu',
+                    title: 'CNF.S',
+                    width: 70,
+                    sortable: false,
+                    align: 'center'
+                },
+                {
+                    field: 'bsumbu1',
+                    title: 'S I',
+                    width: 70,
+                    sortable: false,
+                    align: 'center'
+                },
+                {
+                    field: 'bsumbu2',
+                    title: 'S II',
+                    width: 70,
+                    sortable: false,
+                    align: 'center'
+                },
+                {
+                    field: 'bsumbu3',
+                    title: 'S III',
+                    width: 70,
+                    sortable: false,
+                    align: 'center'
+                },
+                {
+                    field: 'bsumbu4',
+                    title: 'S IV',
+                    width: 70,
+                    sortable: false,
+                    align: 'center'
+                },
+            ]
+        ],
         //        toolbar: "#search",
-        onBeforeLoad: function (params) {
+        onBeforeLoad: function(params) {
             params.textCategory = $('#text_category_rem').val();
         },
-        onClickRow: function () {
+        onClickRow: function() {
             getInformationRem();
         },
-//        onLoadError: function () {
-//            return false;
-//        },
-//        onLoadSuccess: function () {
-//        }
+        //        onLoadError: function () {
+        //            return false;
+        //        },
+        //        onLoadSuccess: function () {
+        //        }
     });
+
+    function perhitungan() {
+        var prosentase_total = 0;
+        var selisih = 0;
+        var prosentase_selisih = 0;
+        //---------------------------------------------------
+        var bsb1kr = parseInt($('#bsb1kr').val());
+        var bsb1kn = parseInt($('#bsb1kn').val());
+        var berat_sumbu1 = parseInt($('#bsumbu1').val());
+        var prosentase_total_sumbu1 = 0;
+        var selisih_sumbu1 = 0;
+        var prosentase_selisih_sumbu1 = 0;
+        prosentase_total_sumbu1 = Math.ceil((((bsb1kr + bsb1kn) / berat_sumbu1) * 100));
+        selisih_sumbu1 = (bsb1kr - bsb1kn);
+        if (selisih_sumbu1 < 0) {
+            selisih_sumbu1 = selisih_sumbu1 * (-1);
+        }
+        prosentase_selisih_sumbu1 = Math.ceil(((selisih_sumbu1 / berat_sumbu1) * 100));
+        if (berat_sumbu1 == 0) {
+            prosentase_total_sumbu1 = 0;
+            prosentase_selisih_sumbu1 = 0;
+        }
+        //---------------------------------------------------
+        var bsb2kr = parseInt($('#bsb2kr').val());
+        var bsb2kn = parseInt($('#bsb2kn').val());
+        var berat_sumbu2 = parseInt($('#bsumbu2').val());
+        var prosentase_total_sumbu2 = 0;
+        var selisih_sumbu2 = 0;
+        var prosentase_selisih_sumbu2 = 0;
+        prosentase_total_sumbu2 = Math.ceil((((bsb2kr + bsb2kn) / berat_sumbu2) * 100));
+        selisih_sumbu2 = (bsb2kr - bsb2kn);
+        if (selisih_sumbu2 < 0) {
+            selisih_sumbu2 = selisih_sumbu2 * (-1);
+        }
+        prosentase_selisih_sumbu2 = Math.ceil(((selisih_sumbu2 / berat_sumbu2) * 100));
+        if (berat_sumbu2 == 0) {
+            prosentase_total_sumbu2 = 0;
+            prosentase_selisih_sumbu2 = 0;
+        }
+        //---------------------------------------------------
+        var bsb3kr = parseInt($('#bsb3kr').val());
+        var bsb3kn = parseInt($('#bsb3kn').val());
+        var berat_sumbu3 = parseInt($('#bsumbu3').val());
+        var prosentase_total_sumbu3 = 0;
+        var selisih_sumbu3 = 0;
+        var prosentase_selisih_sumbu3 = 0;
+        prosentase_total_sumbu3 = Math.ceil((((bsb3kr + bsb3kn) / berat_sumbu3) * 100));
+        selisih_sumbu3 = (bsb3kr - bsb3kn);
+        if (selisih_sumbu3 < 0) {
+            selisih_sumbu3 = selisih_sumbu3 * (-1);
+        }
+        prosentase_selisih_sumbu3 = Math.ceil(((selisih_sumbu3 / berat_sumbu3) * 100));
+        if (berat_sumbu3 == 0) {
+            prosentase_total_sumbu3 = 0;
+            prosentase_selisih_sumbu3 = 0;
+        }
+        //---------------------------------------------------
+        var bsb4kr = parseInt($('#bsb4kr').val());
+        var bsb4kn = parseInt($('#bsb4kn').val());
+        var berat_sumbu4 = parseInt($('#bsumbu4').val());
+        var prosentase_total_sumbu4 = 0;
+        var selisih_sumbu4 = 0;
+        var prosentase_selisih_sumbu4 = 0;
+        prosentase_total_sumbu4 = Math.ceil((((bsb4kr + bsb4kn) / berat_sumbu4) * 100));
+        selisih_sumbu4 = (bsb4kr - bsb4kn);
+        if (selisih_sumbu4 < 0) {
+            selisih_sumbu4 = selisih_sumbu4 * (-1);
+        }
+        prosentase_selisih_sumbu4 = Math.ceil(((selisih_sumbu4 / berat_sumbu4) * 100));
+        if (berat_sumbu4 == 0) {
+            prosentase_total_sumbu4 = 0;
+            prosentase_selisih_sumbu4 = 0;
+        }
+        //---------------------------------------------------
+
+        $('#bsb1').val(isNaN(prosentase_total_sumbu1.toFixed(0)) ? 0 : prosentase_total_sumbu1.toFixed(0));
+        $('#bsb2').val(isNaN(prosentase_total_sumbu2.toFixed(0)) ? 0 : prosentase_total_sumbu2.toFixed(0));
+        $('#bsb3').val(isNaN(prosentase_total_sumbu3.toFixed(0)) ? 0 : prosentase_total_sumbu3.toFixed(0));
+        $('#bsb4').val(isNaN(prosentase_total_sumbu4.toFixed(0)) ? 0 : prosentase_total_sumbu4.toFixed(0));
+        $('#bsel1').val(isNaN(prosentase_selisih_sumbu1.toFixed(0)) ? 0 : prosentase_selisih_sumbu1.toFixed(0));
+        $('#bsel2').val(isNaN(prosentase_selisih_sumbu2.toFixed(0)) ? 0 : prosentase_selisih_sumbu2.toFixed(0));
+        $('#bsel3').val(isNaN(prosentase_selisih_sumbu3.toFixed(0)) ? 0 : prosentase_selisih_sumbu3.toFixed(0));
+        $('#bsel4').val(isNaN(prosentase_selisih_sumbu4.toFixed(0)) ? 0 : prosentase_selisih_sumbu4.toFixed(0));
+    }
 </script>

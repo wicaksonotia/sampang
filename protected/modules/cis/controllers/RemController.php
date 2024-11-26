@@ -1,42 +1,61 @@
 <?php
 
-class RemController extends Controller {
+class RemController extends Controller
+{
 
     public $layout = '//layouts/main_top';
-    
-    public function filters() {
+
+    public function filters()
+    {
         return array(
             'Rights', // perform access control for CRUD operations
         );
     }
-    
-//    public function actionIndex() {
-//        $this->pageTitle = 'Rem';
-//        $this->render('index');
-//    }
-    
-    public function actionReloadData() {
+
+    //    public function actionIndex() {
+    //        $this->pageTitle = 'Rem';
+    //        $this->render('index');
+    //    }
+
+    public function actionReloadData()
+    {
         $tahun_kendaraan = intval($_POST['tahun_kendaraan']);
         $tahun_sekarang = intval(date('Y'));
-        
-        if(($tahun_sekarang - $tahun_kendaraan) <= 5){
+
+        if (($tahun_sekarang - $tahun_kendaraan) <= 5) {
             $sumbu1 = rand(75, 80);
+            $kiri1 = 47 / 100 * $sumbu1;
+            $kanan1 = 53 / 100 * $sumbu1;
             $sumbu2 = rand(75, 80);
+            $kiri2 = 47 / 100 * $sumbu2;
+            $kanan2 = 53 / 100 * $sumbu2;
             $sumbu3 = rand(75, 80);
+            $kiri3 = 47 / 100 * $sumbu3;
+            $kanan3 = 53 / 100 * $sumbu3;
             $sumbu4 = rand(75, 80);
-            $selsumbu1 = rand(2,3);
-            $selsumbu2 = rand(2,3);
-            $selsumbu3 = rand(2,3);
-            $selsumbu4 = rand(2,3);
-        }else{
+            $kiri4 = 47 / 100 * $sumbu4;
+            $kanan4 = 53 / 100 * $sumbu4;
+            $selsumbu1 = rand(2, 3);
+            $selsumbu2 = rand(2, 3);
+            $selsumbu3 = rand(2, 3);
+            $selsumbu4 = rand(2, 3);
+        } else {
             $sumbu1 = rand(70, 75);
+            $kiri1 = 47 / 100 * $sumbu1;
+            $kanan1 = 53 / 100 * $sumbu1;
             $sumbu2 = rand(70, 75);
+            $kiri2 = 47 / 100 * $sumbu2;
+            $kanan2 = 53 / 100 * $sumbu2;
             $sumbu3 = rand(70, 75);
+            $kiri3 = 47 / 100 * $sumbu3;
+            $kanan3 = 53 / 100 * $sumbu3;
             $sumbu4 = rand(70, 75);
-            $selsumbu1 = rand(3,4);
-            $selsumbu2 = rand(3,4);
-            $selsumbu3 = rand(3,4);
-            $selsumbu4 = rand(3,4);
+            $kiri4 = 47 / 100 * $sumbu4;
+            $kanan4 = 53 / 100 * $sumbu4;
+            $selsumbu1 = rand(3, 4);
+            $selsumbu2 = rand(3, 4);
+            $selsumbu3 = rand(3, 4);
+            $selsumbu4 = rand(3, 4);
         }
         $data['bsb1'] = $sumbu1;
         $data['bsb2'] = $sumbu2;
@@ -46,22 +65,33 @@ class RemController extends Controller {
         $data['bsel2'] = $selsumbu2;
         $data['bsel3'] = $selsumbu3;
         $data['bsel4'] = $selsumbu4;
-        
+        $data['kiri1'] = $kiri1;
+        $data['kiri2'] = $kiri2;
+        $data['kiri3'] = $kiri3;
+        $data['kiri4'] = $kiri4;
+        $data['kanan1'] = $kanan1;
+        $data['kanan2'] = $kanan2;
+        $data['kanan3'] = $kanan3;
+        $data['kanan4'] = $kanan4;
+
         echo json_encode($data);
     }
 
-    public function countDecimals($x) {
+    public function countDecimals($x)
+    {
         return strlen(substr(strrchr($x + "", "."), 1));
     }
 
-    public function random($min, $max) {
+    public function random($min, $max)
+    {
         $decimals = max($this->countDecimals($min), $this->countDecimals($max));
         $factor = pow(10, $decimals);
         return rand($min * $factor, $max * $factor) / $factor;
-//        return mt_rand($min * $mul, $max * $mul) / $mul;
+        //        return mt_rand($min * $mul, $max * $mul) / $mul;
     }
 
-    public function actionListGrid() {
+    public function actionListGrid()
+    {
         $kategori = $_POST['textCategory'];
         $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
         $rows = isset($_POST['rows']) ? intval($_POST['rows']) : 5;
@@ -74,7 +104,7 @@ class RemController extends Controller {
         $criteria->limit = $rows;
         $criteria->offset = $offset;
         $result = VCisBrake::model()->findAll($criteria);
-        
+
         $dataJson = array();
         foreach ($result as $p) {
             $dataJson[] = array(
@@ -104,22 +134,21 @@ class RemController extends Controller {
                 'rows' => $dataJson,
             )
         );
-        
+
         Yii::app()->end();
     }
-    
-    public function actionProses() {
+
+    public function actionProses()
+    {
         $idhasil = $_POST['id_hasil_uji'];
         $variabel = $_POST['variabel'];
         $username = $_POST['username'];
         $kategori_rem = $_POST['kategori_rem'];
-        if($kategori_rem == 'gandengan'){
+        if ($kategori_rem == 'gandengan') {
             $sql = "UPDATE tbl_hasil_uji SET smoke=true,lulus_smoke=true,pitlift=true,lulus_pitlift=true,lampu=true,lulus_lampu=true where id_hasil_uji=$idhasil";
             Yii::app()->db->createCommand($sql)->execute();
         }
         $query = "select update_cis_brake('$variabel',$idhasil,'$username');";
         Yii::app()->db->createCommand($query)->execute();
-        
     }
-
 }
