@@ -58,9 +58,14 @@ class RemController extends Controller
             $selsumbu3 = rand(3, 4);
             $selsumbu4 = rand(3, 4);
         }
-        $nilai_rem_parkir = ((20 / 100) * $jbb) / 2;
-        $parkir_kiri = round($nilai_rem_parkir);
-        $parkir_kanan = round($nilai_rem_parkir);
+        $range_parkir_tangan = rand(20, 40);
+        $range_parkir_kaki = rand(20, 40);
+        $nilai_rem_parkir_tangan = (($range_parkir_tangan / 100) * $jbb) / 2;
+        $nilai_rem_parkir_kaki = (($range_parkir_kaki / 100) * $jbb) / 2;
+        $parkir_kiri_tangan = round($nilai_rem_parkir_tangan);
+        $parkir_kanan_tangan = round($nilai_rem_parkir_tangan);
+        $parkir_kiri_kaki = round($nilai_rem_parkir_kaki);
+        $parkir_kanan_kaki = round($nilai_rem_parkir_kaki);
         $data['bsb1'] = $sumbu1;
         $data['bsb2'] = $sumbu2;
         $data['bsb3'] = $sumbu3;
@@ -77,8 +82,10 @@ class RemController extends Controller
         $data['kanan2'] = $kanan2;
         $data['kanan3'] = $kanan3;
         $data['kanan4'] = $kanan4;
-        $data['parkir_kiri'] = $parkir_kiri;
-        $data['parkir_kanan'] = $parkir_kanan;
+        $data['parkir_kiri_tangan'] = $parkir_kiri_tangan;
+        $data['parkir_kanan_tangan'] = $parkir_kanan_tangan;
+        $data['parkir_kiri_kaki'] = $parkir_kiri_kaki;
+        $data['parkir_kanan_kaki'] = $parkir_kanan_kaki;
 
         echo json_encode($data);
     }
@@ -151,10 +158,6 @@ class RemController extends Controller
         $variabel = $_POST['variabel'];
         $username = $_POST['username'];
         $kategori_rem = $_POST['kategori_rem'];
-        if ($kategori_rem == 'gandengan') {
-            $sql = "UPDATE tbl_hasil_uji SET smoke=true,lulus_smoke=true,pitlift=true,lulus_pitlift=true,lampu=true,lulus_lampu=true where id_hasil_uji=$idhasil";
-            Yii::app()->db->createCommand($sql)->execute();
-        }
         $query = "select update_cis_brake('$variabel',$idhasil,'$username');";
         Yii::app()->db->createCommand($query)->execute();
     }
