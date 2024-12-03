@@ -83,13 +83,13 @@
             <div class="col-lg-12 col-md-12 col-sm-12 no-padding" style="margin-bottom: 10px;">
                 <select id="choose_penguji" class="form-control">
                     <?php
-                    // $penguji = Penguji::model()->findAll();
-                    $criteria = new CDbCriteria();
-                    $criteria->addCondition("job_name ilike '%penguji%'");
-                    $penguji = MasterEmployee::model()->findAll($criteria);
+                    $penguji = Penguji::model()->findAll();
+                    // $criteria = new CDbCriteria();
+                    // $criteria->addCondition("job_name ilike '%penguji%'");
+                    // $penguji = MasterEmployee::model()->findAll($criteria);
                     foreach ($penguji as $dataPenguji) :
                     ?>
-                        <option value="<?php echo $dataPenguji->identity_number; ?>"><?php echo $dataPenguji->full_name; ?></option>
+                        <option value="<?php echo $dataPenguji->idx; ?>"><?php echo $dataPenguji->nama; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -117,13 +117,13 @@
             <div class="col-lg-12 col-md-12 col-sm-12 no-padding" style="margin-bottom: 10px;">
                 <select id="choose_penguji_sementara" class="form-control">
                     <?php
-                    // $penguji = Penguji::model()->findAll();
-                    $criteria = new CDbCriteria();
-                    $criteria->addCondition("job_name ilike '%penguji%'");
-                    $penguji = MasterEmployee::model()->findAll($criteria);
+                    $penguji = Penguji::model()->findAll();
+                    // $criteria = new CDbCriteria();
+                    // $criteria->addCondition("job_name ilike '%penguji%'");
+                    // $penguji = MasterEmployee::model()->findAll($criteria);
                     foreach ($penguji as $dataPenguji) :
                     ?>
-                        <option value="<?php echo $dataPenguji->identity_number; ?>"><?php echo $dataPenguji->full_name; ?></option>
+                        <option value="<?php echo $dataPenguji->idx; ?>"><?php echo $dataPenguji->nama; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -151,14 +151,14 @@
             <div class="col-lg-12 col-md-12 col-sm-12 no-padding" style="margin-bottom: 10px;">
                 <select id="choose_lulus_penguji" class="form-control">
                     <?php
-                    // $penguji = Penguji::model()->findAll();
-                    $criteria = new CDbCriteria();
-                    $criteria->addCondition("job_name ilike '%penguji%'");
-                    $penguji = MasterEmployee::model()->findAll($criteria);
+                    $penguji = Penguji::model()->findAll();
+                    // $criteria = new CDbCriteria();
+                    // $criteria->addCondition("job_name ilike '%penguji%'");
+                    // $penguji = MasterEmployee::model()->findAll($criteria);
                     foreach ($penguji as $dataPenguji) :
                     ?>
-                        <option value="<?php echo $dataPenguji->user_id; ?>">
-                            <?php echo $dataPenguji->full_name; ?>
+                        <option value="<?php echo $dataPenguji->idx; ?>">
+                            <?php echo $dataPenguji->nama; ?>
                         </option>
                     <?php endforeach; ?>
                 </select>
@@ -194,13 +194,13 @@
                 ?>
                 <select id="choose_tl_penguji" class="form-control">
                     <?php
-                    // $penguji = Penguji::model()->findAll();
-                    $criteria = new CDbCriteria();
-                    $criteria->addCondition("job_name ilike '%penguji%'");
-                    $penguji = MasterEmployee::model()->findAll($criteria);
+                    $penguji = Penguji::model()->findAll();
+                    // $criteria = new CDbCriteria();
+                    // $criteria->addCondition("job_name ilike '%penguji%'");
+                    // $penguji = MasterEmployee::model()->findAll($criteria);
                     foreach ($penguji as $dataPenguji) :
                     ?>
-                        <option value="<?php echo $dataPenguji->user_id; ?>"><?php echo $dataPenguji->full_name; ?></option>
+                        <option value="<?php echo $dataPenguji->idx; ?>"><?php echo $dataPenguji->nama; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

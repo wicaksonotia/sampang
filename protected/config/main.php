@@ -118,6 +118,7 @@ return array(
         ),
         // database settings are configured in database.php
         'db' => require(dirname(__FILE__) . '/database.php'),
+        'dbcoba' => require(dirname(__FILE__) . '/database_coba.php'),
         //        'db_mysql' => require(dirname(__FILE__) . '/database_mysql.php'),
         'errorHandler' => array(
             // use 'site/error' action to display errors

@@ -141,11 +141,18 @@ class KendaraanKecamatanController extends Controller
         $sheet->getStyle("J")->getAlignment()->applyFromArray(array('vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER));
         $sheet->getColumnDimension("J")->setAutoSize(true);
 
-        $sheet->getStyle('A5:J5')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('b3c6cf');
+        $sheet->setCellValue("K5", "NO. HP");
+        $sheet->getStyle("K5")->getAlignment()->setWrapText(true);
+        $sheet->getStyle("K5")->getAlignment()->applyFromArray(array('horizontal' => PHPExcel_Style_Alignment::HORIZONTAL_CENTER));
+        $sheet->getStyle("K5")->getAlignment()->applyFromArray(array('vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER));
+        $sheet->getStyle("K")->getAlignment()->applyFromArray(array('vertical' => PHPExcel_Style_Alignment::VERTICAL_CENTER));
+        $sheet->getColumnDimension("K")->setAutoSize(true);
+
+        $sheet->getStyle('A5:K5')->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('b3c6cf');
         //END HEADER
         //======================================================================
         $criteria = new CDbCriteria();
-        $criteria->select = 'no_uji,no_kendaraan,nama_pemilik,alamat,kecamatan,kelurahan,nm_komersil,jenis,merk,sifat,bahan_bakar,tgl_mati_uji';
+        $criteria->select = 'no_uji,no_kendaraan,nama_pemilik,alamat,kecamatan,kelurahan,nm_komersil,jenis,merk,sifat,bahan_bakar,tgl_mati_uji,no_telp';
         if (!empty($kecamatan)) {
             if (!empty($kelurahan)) {
                 $criteria->addCondition("kecamatan = '$namaKecamatan'");
@@ -181,6 +188,7 @@ class KendaraanKecamatanController extends Controller
             if (strtotime(date('Y-m-d')) > strtotime($data->tgl_mati_uji)) {
                 $sheet->getStyle('A' . $baris . ':J' . $baris)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('DEA8A8');
             }
+            $sheet->setCellValue("K" . $baris, $data->no_telp);
             $baris++;
             $no++;
         endforeach;
@@ -194,7 +202,8 @@ class KendaraanKecamatanController extends Controller
             )
         );
         $baris = intval($baris) - 1;
-        $sheet->getStyle("A5:J" . $baris)->applyFromArray($styleArray);
+        // $sheet->getStyle('K6:M'.$baris)->getNumberFormat()->setFormatCode('Custom');
+        $sheet->getStyle("A5:K" . $baris)->applyFromArray($styleArray);
         //======================================================================
         ob_clean();
 
