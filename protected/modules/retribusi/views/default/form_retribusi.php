@@ -43,6 +43,25 @@ $cs->registerScriptFile($baseJs . '/jquery.fileuploader.min.js', CClientScript::
                             ?>
                         </div>
                     </div>
+                    <div class="form-group" id="div_kartu_hilang" style="display: none">
+                        <label for="FORM_KARTU_HILANG" class="col-xs-3 control-label">No. Surat Kehilangan</label>
+                        <div class="col-xs-9">
+                            <?php echo CHtml::textField('FORM[KARTU_HILANG]', '', array('class' => 'form-control text-besar', 'placeholder' => 'No. Surat Kehilangan')); ?>
+                        </div>
+                    </div>
+                    <div class="form-group" id="div_wilayah_asal" style="display: none">
+                        <label for="FORM_WILAYAH_ASAL" class="col-xs-3 control-label">Wilayah Asal</label>
+                        <div class="col-xs-9">
+                            <?php
+                            $criteria_wilayah = new CDbCriteria();
+                            // $criteria_wilayah->addNotInCondition('idx', array(12, 30, 145, 148, 149, 151));
+                            $criteria_wilayah->order = 'area_name asc';
+                            $tbl_wilayah = MasterArea::model()->findAll($criteria_wilayah);
+                            $type_wilayah = CHtml::listData($tbl_wilayah, 'area_code', 'area_name');
+                            echo CHtml::dropDownList('FORM[WILAYAH_ASAL]', '', $type_wilayah, array('class' => 'form-control selectpicker show-tick wajib-isi', 'data-live-search' => 'true', 'data-size' => '5', 'empty' => ''));
+                            ?>
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="FORM_NO_STUK" class="col-xs-3 control-label">No. Uji</label>
                         <div class="col-xs-9">
@@ -98,22 +117,6 @@ $cs->registerScriptFile($baseJs . '/jquery.fileuploader.min.js', CClientScript::
                             </div>
                         </div>
                     </div>
-                    <!-- <div class="form-group">
-                        <label for="FORM_JBB" class="col-xs-3 control-label">JBB</label>
-                        <div class="col-xs-9 col-md-3">
-                            <?php // echo CHtml::textField('FORM[JBB]', 0, array('class' => 'form-control text-besar', 'placeholder' => 'JBB')); 
-                            ?>
-                        </div>
-                    </div> -->
-                    <!-- <div class="form-group">
-                        <label for="FORM_JENIS_KENDARAAN" class="col-xs-3 control-label">Jenis Kendaraan</label>
-                        <div class="col-xs-9">
-                            <?php
-                            // $type_list = CHtml::listData($tbl_jns_kend, 'id_jns_kend', 'jns_kend');
-                            // echo CHtml::dropDownList('FORM[JENIS_KENDARAAN]', '', $type_list, array('class' => 'form-control', 'placeholder' => 'Jenis Kendaraan'));
-                            ?>
-                        </div>
-                    </div> -->
                     <div class="form-group">
                         <label for="FORM_TGL_MATI_UJI" class="col-xs-3 control-label">Tgl. Mati Uji</label>
                         <div class="col-xs-9">
@@ -172,19 +175,6 @@ $cs->registerScriptFile($baseJs . '/jquery.fileuploader.min.js', CClientScript::
                             <?php echo CHtml::textField('FORM[NO_TELP]', '', array('class' => 'form-control text-besar', 'placeholder' => 'No. Telp',)); ?>
                         </div>
                     </div>
-                    <div class="form-group" id="div_wilayah_asal" style="display: none">
-                        <label for="FORM_WILAYAH_ASAL" class="col-xs-3 control-label">Wilayah Asal</label>
-                        <div class="col-xs-9">
-                            <?php
-                            $criteria_wilayah = new CDbCriteria();
-                            $criteria_wilayah->addNotInCondition('idx', array(12, 30, 145, 148, 149, 151));
-                            $criteria_wilayah->order = 'namawilayah asc';
-                            $tbl_wilayah = Kodewilayah::model()->findAll($criteria_wilayah);
-                            $type_wilayah = CHtml::listData($tbl_wilayah, 'kodewilayah', 'namawilayah');
-                            echo CHtml::dropDownList('FORM[WILAYAH_ASAL]', '', $type_wilayah, array('class' => 'form-control selectpicker show-tick wajib-isi', 'data-live-search' => 'true', 'data-size' => '5', 'empty' => ''));
-                            ?>
-                        </div>
-                    </div>
                     <div class="form-group">
                         <label for="FORM_BUKU_UJI" class="col-xs-3 control-label">Kartu Uji</label>
                         <div class="col-xs-6 form-group">
@@ -192,11 +182,6 @@ $cs->registerScriptFile($baseJs . '/jquery.fileuploader.min.js', CClientScript::
                             $tbl_bk_uji = TblBkMasuk::model()->findAll();
                             foreach ($tbl_bk_uji as $i => $bk_uji) :
                             ?>
-                                <!-- <label>
-                                    <input value="<?php echo $bk_uji->id_bk_masuk; ?>" type="radio" name="FORM[BUKU_UJI]" id="FORM_BUKU_UJI<?php echo $bk_uji->id_bk_masuk; ?>" class="flat-red" <?php echo ($bk_uji->id_bk_masuk == '1') ? 'checked' : ''; ?>>
-                                    <?php echo ucwords(strtolower($bk_uji->bk_masuk)); ?>
-                                </label>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -->
                                 <div class="col-md-6">
                                     <div class="custom-control custom-radio">
                                         <input value="<?php echo $bk_uji->id_bk_masuk; ?>" class="custom-control-input custom-control-input-danger" type="radio" id="FORM_BUKU_UJI<?php echo $bk_uji->id_bk_masuk; ?>" name="FORM[BUKU_UJI]" <?php echo ($bk_uji->id_bk_masuk == '1') ? 'checked' : ''; ?>>
@@ -273,11 +258,18 @@ $cs->registerScriptFile($baseJs . '/jquery.fileuploader.min.js', CClientScript::
 
     function selectJenisUji() {
         var jenis_uji = $('#FORM_JENIS_PENGUJIAN :selected').val();
+
         if (jenis_uji == 2 || jenis_uji == 4) {
-            $('#div_wilayah_asal').show();
+            $("#div_wilayah_asal").show();
+            $("#div_kartu_hilang").hide();
+        } else if (jenis_uji == 11) {
+            $("#div_wilayah_asal").hide();
+            $("#div_kartu_hilang").show();
         } else {
-            $('#div_wilayah_asal').hide();
+            $("#div_kartu_hilang").hide();
+            $("#div_wilayah_asal").hide();
         }
+
         if (jenis_uji == 11) {
             //BUKU HILANG
             $('#FORM_BUKU_UJI1').iCheck('uncheck');
@@ -304,11 +296,23 @@ $cs->registerScriptFile($baseJs . '/jquery.fileuploader.min.js', CClientScript::
 
             $('#FORM_BUKU_UJI4').iCheck('check');
             $('#FORM_BUKU_UJI4').iCheck('update');
-        } else if (jenis_uji == 8) {
+        } else if (jenis_uji == 8 || jenis_uji == 4) {
             $('#FORM_BUKU_UJI1').iCheck('uncheck');
             $('#FORM_BUKU_UJI1').iCheck('update');
 
             $('#FORM_BUKU_UJI2').iCheck('check');
+            $('#FORM_BUKU_UJI2').iCheck('update');
+
+            $('#FORM_BUKU_UJI3').iCheck('uncheck');
+            $('#FORM_BUKU_UJI3').iCheck('update');
+
+            $('#FORM_BUKU_UJI4').iCheck('uncheck');
+            $('#FORM_BUKU_UJI4').iCheck('update');
+        } else {
+            $('#FORM_BUKU_UJI1').iCheck('check');
+            $('#FORM_BUKU_UJI1').iCheck('update');
+
+            $('#FORM_BUKU_UJI2').iCheck('uncheck');
             $('#FORM_BUKU_UJI2').iCheck('update');
 
             $('#FORM_BUKU_UJI3').iCheck('uncheck');

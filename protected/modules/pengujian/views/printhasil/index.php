@@ -83,13 +83,13 @@
             <div class="col-lg-12 col-md-12 col-sm-12 no-padding" style="margin-bottom: 10px;">
                 <select id="choose_penguji" class="form-control">
                     <?php
-                    $penguji = Penguji::model()->findAll();
-                    // $criteria = new CDbCriteria();
-                    // $criteria->addCondition("job_name ilike '%penguji%'");
-                    // $penguji = MasterEmployee::model()->findAll($criteria);
+                    // $penguji = Penguji::model()->findAll();
+                    $criteria = new CDbCriteria();
+                    $criteria->addCondition("job_name ilike '%penguji%'");
+                    $penguji = MasterEmployee::model()->findAll($criteria);
                     foreach ($penguji as $dataPenguji) :
                     ?>
-                        <option value="<?php echo $dataPenguji->idx; ?>"><?php echo $dataPenguji->nama; ?></option>
+                        <option value="<?php echo $dataPenguji->user_id; ?>"><?php echo $dataPenguji->full_name; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -117,13 +117,13 @@
             <div class="col-lg-12 col-md-12 col-sm-12 no-padding" style="margin-bottom: 10px;">
                 <select id="choose_penguji_sementara" class="form-control">
                     <?php
-                    $penguji = Penguji::model()->findAll();
-                    // $criteria = new CDbCriteria();
-                    // $criteria->addCondition("job_name ilike '%penguji%'");
-                    // $penguji = MasterEmployee::model()->findAll($criteria);
+                    // $penguji = Penguji::model()->findAll();
+                    $criteria = new CDbCriteria();
+                    $criteria->addCondition("job_name ilike '%penguji%'");
+                    $penguji = MasterEmployee::model()->findAll($criteria);
                     foreach ($penguji as $dataPenguji) :
                     ?>
-                        <option value="<?php echo $dataPenguji->idx; ?>"><?php echo $dataPenguji->nama; ?></option>
+                        <option value="<?php echo $dataPenguji->user_id; ?>"><?php echo $dataPenguji->full_name; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -151,15 +151,13 @@
             <div class="col-lg-12 col-md-12 col-sm-12 no-padding" style="margin-bottom: 10px;">
                 <select id="choose_lulus_penguji" class="form-control">
                     <?php
-                    $penguji = Penguji::model()->findAll();
-                    // $criteria = new CDbCriteria();
-                    // $criteria->addCondition("job_name ilike '%penguji%'");
-                    // $penguji = MasterEmployee::model()->findAll($criteria);
+                    // $penguji = Penguji::model()->findAll();
+                    $criteria = new CDbCriteria();
+                    $criteria->addCondition("job_name ilike '%penguji%'");
+                    $penguji = MasterEmployee::model()->findAll($criteria);
                     foreach ($penguji as $dataPenguji) :
                     ?>
-                        <option value="<?php echo $dataPenguji->idx; ?>">
-                            <?php echo $dataPenguji->nama; ?>
-                        </option>
+                        <option value="<?php echo $dataPenguji->user_id; ?>"><?php echo $dataPenguji->full_name; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -194,13 +192,13 @@
                 ?>
                 <select id="choose_tl_penguji" class="form-control">
                     <?php
-                    $penguji = Penguji::model()->findAll();
-                    // $criteria = new CDbCriteria();
-                    // $criteria->addCondition("job_name ilike '%penguji%'");
-                    // $penguji = MasterEmployee::model()->findAll($criteria);
+                    // $penguji = Penguji::model()->findAll();
+                    $criteria = new CDbCriteria();
+                    $criteria->addCondition("job_name ilike '%penguji%'");
+                    $penguji = MasterEmployee::model()->findAll($criteria);
                     foreach ($penguji as $dataPenguji) :
                     ?>
-                        <option value="<?php echo $dataPenguji->idx; ?>"><?php echo $dataPenguji->nama; ?></option>
+                        <option value="<?php echo $dataPenguji->user_id; ?>"><?php echo $dataPenguji->full_name; ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
@@ -285,6 +283,12 @@
                     {
                         field: 'kartu_uji',
                         title: 'Kartu Uji',
+                        width: 80,
+                        sortable: false
+                    },
+                    {
+                        field: 'nm_uji',
+                        title: 'Jenis Uji',
                         width: 80,
                         sortable: false
                     },
@@ -548,27 +552,8 @@
             var penguji = $("#choose_penguji option:selected").val();
             var id = $('#dialog_id').val();
             var url = $('#dialog_url').val();
-            $.ajax({
-                url: '<?php echo $this->createUrl('Printhasil/SaveCetakTidakLulus'); ?>',
-                type: 'POST',
-                data: {
-                    penguji: penguji,
-                    id: id
-                },
-                success: function(data) {
-                    $('#dlg_no_surat').dialog('close');
-                    prosesSearch();
-                    prosesCetakTidakLulus(url, id, no_surat, penguji);
-                },
-                error: function(data) {
-                    $('#dlg_no_surat').dialog('close');
-                    prosesSearch();
-                    return false;
-                }
-            });
-        }
-
-        function prosesCetakTidakLulus(url, id, no_surat, penguji) {
+            $('#dlg_no_surat').dialog('close');
+            prosesSearch();
             var win = window.open(url + "?id=" + id + "&nosurat=" + no_surat + "&nrp=" + penguji, '_blank');
             win.focus();
         }

@@ -4,11 +4,12 @@ $cs = Yii::app()->clientScript;
 $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
 ?>
 <style>
-    .img_buku{
+    .img_buku {
         position: absolute;
-        display:block;
+        display: block;
         width: 100%;
     }
+
     .pages {
         /*page-break-after: always;*/
         font-family: Calibri;
@@ -19,186 +20,225 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
         z-index: 100;
 
     }
-    .kolom_kiri{
+
+    .kolom_kiri {
         float: left;
         width: 50%;
         max-width: 50%;
         height: 100%;
         margin: 0px;
-        padding:0px;
+        padding: 0px;
         display: inline-block;
         /*border: 1px solid #000;*/
     }
-    .kolom_kanan{
+
+    .kolom_kanan {
         float: left;
         width: 50%;
         max-width: 50%;
         height: 100%;
         margin: 0px;
-        padding:0px;
+        padding: 0px;
         display: inline-block;
         /*border: 1px solid #000;*/
     }
+
     /*=================================*/
     /*
     *PAGE 1
     */
     /*=================================*/
-    #konten_kanan_page1{
+    #konten_kanan_page1 {
         width: 100%;
         font-weight: bold;
         font-size: 12pt;
     }
-    #kota_page1{
+
+    #kota_page1 {
         padding-top: 50px;
         margin-left: 230px;
     }
-    #tgl_page1{
+
+    #tgl_page1 {
         margin-top: 37px;
         margin-left: 230px;
     }
-    #no_uji_page1{
+
+    #no_uji_page1 {
         width: 100%;
         margin-top: 300px;
         font-size: 16pt;
         text-align: center;
     }
-    #no_kend_page1{
+
+    #no_kend_page1 {
         width: 100%;
         font-size: 10pt;
         text-align: center;
     }
+
     /*=================================*/
     /*
     *PAGE 2
     */
     /*=================================*/
-    #konten_kiri_page2{
+    #konten_kiri_page2 {
         padding-left: 210px;
         padding-top: 190px;
         font-weight: bold;
         font-size: 12pt;
     }
-    #no_uji_page2{
-    }
-    #no_kend_page2{
+
+    #no_uji_page2 {}
+
+    #no_kend_page2 {
         margin-top: 25px;
     }
-    #nm_pemilik_page2{
+
+    #nm_pemilik_page2 {
         margin-top: 30px;
         height: 20px;
     }
-    #alamat_pemilik_page2{
-        height:100px;
+
+    #alamat_pemilik_page2 {
+        height: 100px;
         margin-top: 35px;
     }
-    #ktp_page2{
+
+    #ktp_page2 {
         margin-top: 45px;
     }
+
     /*=================================*/
-    .konten_kanan_page2{
+    .konten_kanan_page2 {
         padding-left: 250px;
         /*padding-top: 70px;*/
         font-weight: bold;
         font-size: 9pt;
     }
-    #merk_page2{
+
+    #merk_page2 {
         padding-top: 140px;
     }
-    #tipe_page2{
+
+    #tipe_page2 {
         /*margin-top:5px;*/
     }
-    #jenis_page2{
+
+    #jenis_page2 {
         padding-left: 30px;
-        margin-top:20px;
+        margin-top: 20px;
         font-weight: bold;
         font-size: 9pt;
     }
-    #daya_motor_page2{
+
+    #daya_motor_page2 {
         /*margin-top:5px;*/
     }
-    #bahan_bakar_page2{
+
+    #bahan_bakar_page2 {
         /*margin-top:0px;*/
     }
-    #tahun_pembuatan_page2{
+
+    #tahun_pembuatan_page2 {
         /*margin-top:7px;*/
     }
-    #status_penggunaan_page2{
+
+    #status_penggunaan_page2 {
         /*margin-top:7px;*/
     }
-    #no_rangka_page2{
+
+    #no_rangka_page2 {
         margin-top: 35px;
     }
-    #no_mesin_page2{
-        margin-top:15px;
+
+    #no_mesin_page2 {
+        margin-top: 15px;
     }
-    #no_sertifikasi_page2{
-        margin-left:100px;
-        margin-top:7px;
+
+    #no_sertifikasi_page2 {
+        margin-left: 100px;
+        margin-top: 7px;
         font-weight: bold;
         font-size: 9pt;
     }
-    #petugas_page2{
+
+    #petugas_page2 {
         padding-left: 30px;
         margin-top: 70px;
         font-weight: bold;
         font-size: 9pt;
     }
+
     /*=================================*/
     /*
     *PAGE 3
     */
     /*=================================*/
-    #konten_kiri_page3{
+    #konten_kiri_page3 {
         padding-left: 300px;
         padding-top: 45px;
         font-weight: bold;
         font-size: 9pt;
     }
-    #jarak_sumbu12_page3{
+
+    #jarak_sumbu12_page3 {
         /*margin-top: 10px;*/
     }
-    #q_page3{
+
+    #q_page3 {
         margin-top: 20px;
     }
-    #dimensi_panjang_page3{
+
+    #dimensi_panjang_page3 {
         margin-top: 15px;
     }
-    #pemakaian_sumbu1_page3{
+
+    #pemakaian_sumbu1_page3 {
         margin-top: 120px;
     }
-    #konfigurasi_sumbu_page3{
+
+    #konfigurasi_sumbu_page3 {
         margin-top: 30px;
     }
-    #jbb_page3{
+
+    #jbb_page3 {
         margin-top: 10px;
     }
+
     /*=================================*/
-    #konten_kanan_page3{
+    #konten_kanan_page3 {
         padding-left: 250px;
         padding-top: 75px;
         font-weight: bold;
         font-size: 9pt;
     }
-    #berat_kosong_sumbu2_page3{
+
+    #berat_kosong_sumbu2_page3 {
         margin-top: 7px;
     }
-    #berat_kosong_jumlah_page3{
+
+    #berat_kosong_jumlah_page3 {
         margin-top: 25px;
     }
-    #orang_page3{
+
+    #orang_page3 {
         margin-top: 39px;
     }
-    #barang_page3{
+
+    #barang_page3 {
         margin-top: 15px;
     }
-    #jbi_page3{
+
+    #jbi_page3 {
         margin-top: 15px;
     }
-    #mst_page3{
+
+    #mst_page3 {
         margin-top: 135px;
     }
-    #kelas_jalan_terendah_page3{
+
+    #kelas_jalan_terendah_page3 {
         margin-top: 35px;
     }
 </style>
@@ -231,15 +271,16 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-12">
                                     <button type="button" class="btn btn-info" onclick="prosesSearch()">
-                                        <span class="glyphicon glyphicon-refresh"></span> 
+                                        <span class="glyphicon glyphicon-refresh"></span>
                                         Refresh
                                     </button>
-<!--                                    <div class="btn-group" role="group" aria-label="...">
+                                    <!--                                    <div class="btn-group" role="group" aria-label="...">
                                         <button type="button" class="btn btn-info" onclick="prosesSearch()">
                                             <span class="glyphicon glyphicon-refresh"></span> 
                                             Refresh
                                         </button>
-                                        <button class="btn btn-success" type="button" onclick="rekapBuku('<?php // echo $this->createUrl('Bukuuji/RekapBukuUji'); ?>')">
+                                        <button class="btn btn-success" type="button" onclick="rekapBuku('<?php // echo $this->createUrl('Bukuuji/RekapBukuUji'); 
+                                                                                                            ?>')">
                                             <i class="fa fa-file-excel-o"></i> Rekap Buku Uji
                                         </button>
                                     </div>-->
@@ -258,7 +299,7 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
                                 </div>
                                 <div class="col-lg-2 col-md-3">
                                     <button type="button" class="btn btn-info" onclick="prosesSearchPerKendaraan()">
-                                        <span class="glyphicon glyphicon-refresh"></span> 
+                                        <span class="glyphicon glyphicon-refresh"></span>
                                         Refresh
                                     </button>
                                 </div>
@@ -277,7 +318,7 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
     </div>
 </div>
 <div id="dlg_no_seri" class="easyui-dialog" title="Nomor Seri Buku" style="width: 400px; height: auto; padding: 10px;display: none"
-     data-options="
+    data-options="
      iconCls: 'icon-save',
      autoOpen: false,
      buttons: [{
@@ -304,7 +345,7 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
                 <input type="text" name="dlg_text_no_seri" id="dlg_text_no_seri" class="form-control" style="text-transform: uppercase" />
             </div>
         </div>
-        <div class="form-group">    
+        <div class="form-group">
             <div class="input-group">
                 <div class="input-group-addon">
                     <i class="glyphicon glyphicon-calendar"></i>
@@ -315,7 +356,7 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
     </form>
 </div>
 <div id="dlg_no_seri_per_kendaraan" class="easyui-dialog" title="Edit Kelulusan" style="width: 400px; height: auto; padding: 10px;display: none"
-     data-options="
+    data-options="
      iconCls: 'icon-save',
      autoOpen: false,
      buttons: [{
@@ -342,7 +383,7 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
                 <input type="text" name="dlg_text_no_seri_per_kendaraan" id="dlg_text_no_seri_per_kendaraan" class="form-control" style="text-transform: uppercase" />
             </div>
         </div>
-        <div class="form-group">    
+        <div class="form-group">
             <div class="input-group">
                 <div class="input-group-addon">
                     <i class="glyphicon glyphicon-calendar"></i>
@@ -353,7 +394,7 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
     </form>
 </div>
 <div id="dlg_cetak_hasil" class="easyui-dialog" title="Cetak Hasil Uji" style="width: 400px; height: auto; padding: 10px;display: none"
-     data-options="
+    data-options="
      iconCls: 'icon-print',
      autoOpen: false,
      buttons: [{
@@ -373,10 +414,12 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
             ?>
             <select id="choose_penguji" class="form-control">
                 <?php
-                $penguji = Penguji::model()->findAll();
+                $criteria = new CDbCriteria();
+                $criteria->addCondition("job_name ilike '%penguji%'");
+                $penguji = MasterEmployee::model()->findAll($criteria);
                 foreach ($penguji as $dataPenguji):
-                    ?>
-                    <option value="<?php echo $dataPenguji->nrp; ?>"><?php echo $dataPenguji->nama; ?></option>
+                ?>
+                    <option value="<?php echo $dataPenguji->user_id; ?>"><?php echo $dataPenguji->full_name; ?></option>
                 <?php endforeach; ?>
             </select>
         </div>
@@ -389,7 +432,7 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
     </div>
 </div>
 <div id="dlg_detail_buku" class="easyui-dialog" title="Cetak Buku Uji" style="width: 900px; height: 600px; padding: 10px;display: none; overflow-x: hidden;"
-     data-options="
+    data-options="
      iconCls: 'icon-print',
      autoOpen: false,
      buttons: [{
@@ -521,31 +564,74 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
         pageNumber: 1,
         pageSize: 5,
         pageList: [5, 50, 100],
-        columns: [[
-//                {field: 'id_retribusi', title: 'PRINT BUKU', width: 100, halign: 'center', align: 'center', formatter: buttonBukuUji},
-                {field: 'id_kendaraan', title: 'RIWAYAT', width: 70, halign: 'center', align: 'center', formatter: buttonRiwayat},
-//                {field: 'id_kendaraan', hidden: true},
-                {field: 'numerator_hari', title: 'NUMERATOR', width: 100, sortable: true},
-                {field: 'no_uji', title: 'NO UJI', width: 90, sortable: false},
-                {field: 'no_kendaraan', width: 90, title: 'NO KEND', sortable: false},
-                {field: 'nama_pemilik', width: 250, title: 'NAMA PEMILIK', sortable: false},
-                {field: 'no_seri', width: 120, title: 'SERI BUKU', sortable: true},
-                {field: 'tgl_cetak', width: 90, title: 'TGL CETAK', sortable: false},
-                {field: 'petugas', title: 'PETUGAS CETAK', width: 120, sortable: true}
-            ]],
-//        toolbar: "#search",
-        onBeforeLoad: function (params) {
+        columns: [
+            [
+                //                {field: 'id_retribusi', title: 'PRINT BUKU', width: 100, halign: 'center', align: 'center', formatter: buttonBukuUji},
+                {
+                    field: 'id_kendaraan',
+                    title: 'RIWAYAT',
+                    width: 70,
+                    halign: 'center',
+                    align: 'center',
+                    formatter: buttonRiwayat
+                },
+                //                {field: 'id_kendaraan', hidden: true},
+                {
+                    field: 'numerator_hari',
+                    title: 'NUMERATOR',
+                    width: 100,
+                    sortable: true
+                },
+                {
+                    field: 'no_uji',
+                    title: 'NO UJI',
+                    width: 90,
+                    sortable: false
+                },
+                {
+                    field: 'no_kendaraan',
+                    width: 90,
+                    title: 'NO KEND',
+                    sortable: false
+                },
+                {
+                    field: 'nama_pemilik',
+                    width: 250,
+                    title: 'NAMA PEMILIK',
+                    sortable: false
+                },
+                {
+                    field: 'no_seri',
+                    width: 120,
+                    title: 'SERI BUKU',
+                    sortable: true
+                },
+                {
+                    field: 'tgl_cetak',
+                    width: 90,
+                    title: 'TGL CETAK',
+                    sortable: false
+                },
+                {
+                    field: 'petugas',
+                    title: 'PETUGAS CETAK',
+                    width: 120,
+                    sortable: true
+                }
+            ]
+        ],
+        //        toolbar: "#search",
+        onBeforeLoad: function(params) {
             params.chooseProses = $('#choose_proses :selected').val();
             params.textCategory = $('#text_category').val();
             params.selectCategory = $('#select_category :selected').val();
             params.selectDate = $('#tgl_search').val();
         },
-        onLoadError: function () {
+        onLoadError: function() {
             hidelargeloader();
             return false;
         },
-        onLoadSuccess: function () {
-        }
+        onLoadSuccess: function() {}
     });
 
     $('#bukuPerKendaraanListGrid').datagrid({
@@ -564,28 +650,71 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
         pageNumber: 1,
         pageSize: 5,
         pageList: [5, 50, 100],
-        columns: [[
-//                {field: 'id_retribusi', title: 'PRINT BUKU', width: 100, halign: 'center', align: 'center', formatter: buttonBukuUji},
-                {field: 'id_kendaraan', title: 'RIWAYAT', width: 70, halign: 'center', align: 'center', formatter: buttonRiwayat},
-//                {field: 'id_kendaraan', hidden: true},
-                {field: 'no_uji', title: 'NO UJI', width: 90, sortable: false},
-                {field: 'no_kendaraan', width: 90, title: 'NO KEND', sortable: false},
-                {field: 'nama_pemilik', width: 250, title: 'NAMA PEMILIK', sortable: false},
-                {field: 'no_seri', width: 120, title: 'SERI BUKU', sortable: true},
-                {field: 'tgl_retribusi', width: 90, title: 'TGL RETRIBUSI', sortable: false},
-                {field: 'tgl_cetak', width: 90, title: 'TGL CETAK', sortable: false},
-                {field: 'petugas', title: 'PETUGAS', width: 80, sortable: true}
-            ]],
-//        toolbar: "#search",
-        onBeforeLoad: function (params) {
+        columns: [
+            [
+                //                {field: 'id_retribusi', title: 'PRINT BUKU', width: 100, halign: 'center', align: 'center', formatter: buttonBukuUji},
+                {
+                    field: 'id_kendaraan',
+                    title: 'RIWAYAT',
+                    width: 70,
+                    halign: 'center',
+                    align: 'center',
+                    formatter: buttonRiwayat
+                },
+                //                {field: 'id_kendaraan', hidden: true},
+                {
+                    field: 'no_uji',
+                    title: 'NO UJI',
+                    width: 90,
+                    sortable: false
+                },
+                {
+                    field: 'no_kendaraan',
+                    width: 90,
+                    title: 'NO KEND',
+                    sortable: false
+                },
+                {
+                    field: 'nama_pemilik',
+                    width: 250,
+                    title: 'NAMA PEMILIK',
+                    sortable: false
+                },
+                {
+                    field: 'no_seri',
+                    width: 120,
+                    title: 'SERI BUKU',
+                    sortable: true
+                },
+                {
+                    field: 'tgl_retribusi',
+                    width: 90,
+                    title: 'TGL RETRIBUSI',
+                    sortable: false
+                },
+                {
+                    field: 'tgl_cetak',
+                    width: 90,
+                    title: 'TGL CETAK',
+                    sortable: false
+                },
+                {
+                    field: 'petugas',
+                    title: 'PETUGAS',
+                    width: 80,
+                    sortable: true
+                }
+            ]
+        ],
+        //        toolbar: "#search",
+        onBeforeLoad: function(params) {
 
         },
-        onLoadError: function () {
+        onLoadError: function() {
             hidelargeloader();
             return false;
         },
-        onLoadSuccess: function () {
-        }
+        onLoadSuccess: function() {}
     });
 
     $('#riwayatListGrid').datagrid({
@@ -604,30 +733,78 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
         pageNumber: 1,
         pageSize: 20,
         pageList: [20, 50, 100, 250],
-        columns: [[
-                {field: 'id_hasil_uji', title: 'Print Hasil', width: 70, halign: 'center', align: 'center', formatter: buttonPrintHasilUji},
-                {field: 'no_uji', title: 'No Uji', width: 90, sortable: false},
-                {field: 'no_kendaraan', width: 90, title: 'No Kendaraan', sortable: false},
-                {field: 'tempat', width: 120, title: 'Tempat', sortable: false},
-                {field: 'tgl_uji', width: 120, title: 'Tgl Uji', sortable: false},
-                {field: 'berlaku', width: 90, title: 'Berlaku', sortable: false},
-                {field: 'nama_penguji', width: 200, title: 'Nama Penguji', sortable: false},
-                {field: 'nrp', width: 120, title: 'NRP', sortable: false},
-                {field: 'catatan', width: 150, title: 'Catatan', sortable: false},
-            ]],
-//        toolbar: "#search",
-        onLoadError: function () {
+        columns: [
+            [{
+                    field: 'id_hasil_uji',
+                    title: 'Print Hasil',
+                    width: 70,
+                    halign: 'center',
+                    align: 'center',
+                    formatter: buttonPrintHasilUji
+                },
+                {
+                    field: 'no_uji',
+                    title: 'No Uji',
+                    width: 90,
+                    sortable: false
+                },
+                {
+                    field: 'no_kendaraan',
+                    width: 90,
+                    title: 'No Kendaraan',
+                    sortable: false
+                },
+                {
+                    field: 'tempat',
+                    width: 120,
+                    title: 'Tempat',
+                    sortable: false
+                },
+                {
+                    field: 'tgl_uji',
+                    width: 120,
+                    title: 'Tgl Uji',
+                    sortable: false
+                },
+                {
+                    field: 'berlaku',
+                    width: 90,
+                    title: 'Berlaku',
+                    sortable: false
+                },
+                {
+                    field: 'nama_penguji',
+                    width: 200,
+                    title: 'Nama Penguji',
+                    sortable: false
+                },
+                {
+                    field: 'nrp',
+                    width: 120,
+                    title: 'NRP',
+                    sortable: false
+                },
+                {
+                    field: 'catatan',
+                    width: 150,
+                    title: 'Catatan',
+                    sortable: false
+                },
+            ]
+        ],
+        //        toolbar: "#search",
+        onLoadError: function() {
             hidelargeloader();
             return false;
         },
-        onLoadSuccess: function () {
-        }
+        onLoadSuccess: function() {}
     });
 
     function buttonRiwayat(value) {
         var button = '<button type="button" data-toggle="tooltip" title="Riwayat" class="btn btn-info" onclick="prosesDetailBukuUji(' + value + ')"><span class="glyphicon glyphicon-zoom-in"></span></button>';
         return button;
     }
+
     function buttonPrintHasilUji(value) {
         var explode = value.split('|');
         var id_hasil_uji = explode[0];
@@ -637,6 +814,7 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
         var button = '<button type="button" data-toggle="tooltip" title="Hasil Uji" class="btn btn-success" onclick="buttonDialogPosisi(\'' + url + '\', \'' + id_hasil_uji + '\', \'' + nrp + '\', \'' + id_kendaraan + '\')"><span class="glyphicon glyphicon-print"></span></button>';
         return button;
     }
+
     function buttonBukuUji(value) {
         var explode = value.split('|');
         var id_retribusi = explode[0];
@@ -647,6 +825,7 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
         var buttonview = '<button type="button" data-toggle="tooltip" title="Buku Uji" class="btn btn-warning" onclick="buttonDetailBuku(\'' + urlAct + '\', ' + id_retribusi + ',\'' + value + '\')"><span class="fa fa-book"></span></button>';
         return button + " " + buttonview;
     }
+
     function buttonBukuUjiPerKendaraan(value) {
         var explode = value.split('|');
         var id_retribusi = explode[0];
@@ -661,14 +840,14 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
     function prosesDetailBukuUji(row) {
         $('#riwayatListGrid').datagrid({
             url: '<?php echo $this->createUrl('Bukuuji/RiwayatBukuListGrid'); ?>',
-            onBeforeLoad: function (param) {
+            onBeforeLoad: function(param) {
                 showlargeloader();
                 param.idKendaraan = row;
             },
-            onLoadSuccess: function () {
+            onLoadSuccess: function() {
                 hidelargeloader();
             },
-            onLoadError: function () {
+            onLoadError: function() {
                 hidelargeloader();
                 return false;
             },
@@ -682,19 +861,19 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
             type: 'POST',
             data: data,
             dataType: 'JSON',
-//            beforeSend: function () {
-//                showlargeloader();
-//            },
-            success: function (data) {
+            //            beforeSend: function () {
+            //                showlargeloader();
+            //            },
+            success: function(data) {
                 $('#dlg_no_seri').dialog('close');
                 prosesSearch();
                 printCetakBuku(data.id_buku);
-//                hidelargeloader();
+                //                hidelargeloader();
             },
-            error: function (data) {
+            error: function(data) {
                 $('#dlg_no_seri').dialog('close');
                 prosesSearch();
-//                hidelargeloader();
+                //                hidelargeloader();
                 return false;
             }
         });
@@ -707,19 +886,19 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
             type: 'POST',
             data: data,
             dataType: 'JSON',
-//            beforeSend: function () {
-//                showlargeloader();
-//            },
-            success: function (data) {
+            //            beforeSend: function () {
+            //                showlargeloader();
+            //            },
+            success: function(data) {
                 $('#dlg_no_seri_per_kendaraan').dialog('close');
                 prosesSearchPerKendaraan();
                 printCetakBuku(data.id_buku);
-//                hidelargeloader();
+                //                hidelargeloader();
             },
-            error: function (data) {
+            error: function(data) {
                 $('#dlg_no_seri_per_kendaraan').dialog('close');
                 prosesSearchPerKendaraan();
-//                hidelargeloader();
+                //                hidelargeloader();
                 return false;
             }
         });
@@ -753,9 +932,11 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
         $.ajax({
             url: urlAct,
             type: 'POST',
-            data: {id: id},
+            data: {
+                id: id
+            },
             dataType: 'JSON',
-            success: function (data) {
+            success: function(data) {
                 $("#text_value_detail_buku").val(value);
                 $('#dlg_detail_buku').dialog('open');
                 //PAGE 1
@@ -814,7 +995,7 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
                 $('#mst_page3').html(data.mst);
                 $('#kelas_jalan_terendah_page3').html(data.kls_jln);
             },
-            error: function (data) {
+            error: function(data) {
                 return false;
             }
         });
@@ -822,7 +1003,7 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
 
     function savePrintHasilUji() {
         var posisi = $("#choose_posisi option:selected").val();
-//        var pilihan = $("#choose_pilihan option:selected").val();
+        //        var pilihan = $("#choose_pilihan option:selected").val();
         var penguji = $("#choose_penguji option:selected").val();
         var id = $('#dialog_lulus_id').val();
         var url = $('#dialog_lulus_url').val();
@@ -830,13 +1011,17 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
         $.ajax({
             url: '<?php echo $this->createUrl('Bukuuji/SaveCetakl'); ?>',
             type: 'POST',
-            data: {id: id, posisi: posisi, penguji: penguji},
-            success: function (data) {
+            data: {
+                id: id,
+                posisi: posisi,
+                penguji: penguji
+            },
+            success: function(data) {
                 $('#dlg_cetak_hasil').dialog('close');
                 prosesDetailBukuUji(id_kendaraan);
                 //printHasilUji(url, id, posisi, penguji);
             },
-            error: function (data) {
+            error: function(data) {
                 $('#dlg_cetak_hasil').dialog('close');
                 return false;
             }
@@ -853,5 +1038,4 @@ $cs->registerScriptFile($path . '/js/buku_uji.js', CClientScript::POS_END);
         window.location.href = urlAct + "?tgl=" + tgl;
         return false;
     }
-
 </script>

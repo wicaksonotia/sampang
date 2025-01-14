@@ -198,7 +198,7 @@ class DefaultController extends Controller
         $NO_TELP = strtoupper($form['NO_TELP']);
         $NO_MESIN = strtoupper($form['NO_MESIN']);
         $NO_CHASIS = strtoupper($form['NO_CHASIS']);
-
+        $KARTU_HILANG = strtoupper($form['KARTU_HILANG']) ?? '-';
 
         if ($JENIS_PENGUJIAN == 8 || $JENIS_PENGUJIAN == 4 || $JENIS_PENGUJIAN == 2) {
             $cekDataKendaraan = TblKendaraan::model()->findByAttributes(array('no_kendaraan' => $NO_KENDARAAN));
@@ -215,16 +215,18 @@ class DefaultController extends Controller
 
             $data_uji = $BUKU_UJI . '~' . $JENIS_PENGUJIAN . '~' . $tgl_retribusi . '~' . $TGL_PENGUJIAN . '~' . $TGL_MATI_UJI . '~' . $WILAYAH_ASAL;
 
-            $data_pemilik = $NAMA_PEMILIK . '~' . $ALAMAT . '~' . $NO_KTP . '~' . $NO_TELP . '~' . $tanda_pengenal;
+            $data_pemilik = $NAMA_PEMILIK . '~' . $ALAMAT . '~' . $NO_KTP . '~' . $NO_TELP . '~' . $tanda_pengenal . '~' . $KARTU_HILANG;
             $data_kuasa = '' . '~' . '' . '~' . '' . '~' . 'Orang/Pribadi' . '~' . 'false';
 
             //CEK DAFTAR HARI INI
             $criteria = new CDbCriteria();
             $criteria->addCondition('id_kendaraan = ' . $ID_KENDARAAN);
             $criteria->addCondition("tgl_uji =  '$TGL_PENGUJIAN'");
+            $criteria->addCondition("id_uji =  1");
             $data = TblRetribusi::model()->find($criteria);
             //JIKA BELUM TERDAFTAR ATAU LAIN-LAIN ATAU MUTASI KELUAR ATAU NUMPANG KELUAR
-            if (empty($data) || $JENIS_PENGUJIAN == 5 || $JENIS_PENGUJIAN == 3 || $JENIS_PENGUJIAN == 10 || $JENIS_PENGUJIAN == 11) {
+            // if (empty($data) || $JENIS_PENGUJIAN == 5 || $JENIS_PENGUJIAN == 3 || $JENIS_PENGUJIAN == 10 || $JENIS_PENGUJIAN == 11) {
+            if (empty($data)) {
                 //LAIN-LAIN BEDA PENDAFTAR
                 $td = 'false';
                 $result['ada'] = 'true';

@@ -190,11 +190,10 @@ class SiteController extends Controller
         $no_hp = "";
         $id_kendaraan = "";
         foreach ($data_kendaraan as $data) :
-            if ($data['selisih'] <= 7) {
-                $no_hp = $data['no_telp'];
+            if (($data['selisih'] <= 7) && (!empty($no_hp))) {
+                $no_uji = $data['no_uji'];
+                $no_telp = $data['no_telp'];
                 $id_kendaraan = $data['id_kendaraan'];
-            }
-            if (!empty($no_hp)) {
                 $curl = curl_init();
 
                 curl_setopt_array($curl, [
@@ -206,35 +205,77 @@ class SiteController extends Controller
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => "POST",
                     CURLOPT_POSTFIELDS => json_encode([
-                        'to_name' => 'UjiKIR',
-                        'to_number' => $no_hp,
-                        'message_template_id' => '0ffb59f8-16c0-4241-8ae9-ac128330a0ff',
+                        'to_name' => $no_uji,
+                        'to_number' => $no_telp,
+                        'message_template_id' => '05d31848-260e-4a02-a798-5b68b2fb9e3d',
                         'channel_integration_id' => '509f8fcb-b29e-47dc-be5b-875e7b74ad6d',
                         'language' => [
                             'code' => 'en'
                         ],
                         'parameters' => [
-                            '' => ''
+                            'body' => [
+                                [
+                                    'key' => '1',
+                                    'value_text' => 'PKB Dishub Sampang',
+                                    'value' => 'layanan_name'
+                                ]
+                            ]
                         ]
                     ]),
                     CURLOPT_HTTPHEADER => [
-                        "Authorization: Bearer on2HUkR9P6rJkaVDy0iSYuvjW6IMLucWO0B5vP3GLaU",
+                        "Authorization: Bearer dQ134MyvSqKgBvUiNR2Buw5OIyxL98nSIFIq9XnXIM0",
                         "Content-Type: application/json"
                     ],
                 ]);
 
                 $response = curl_exec($curl);
                 $err = curl_error($curl);
+
                 curl_close($curl);
+
                 if ($err) {
-                    $respon = "cURL Error #:" . $err;
-                } else {
-                    $respon =  $response;
+                    $response =  "cURL Error #:" . $err;
                 }
-                // echo $respon;
+
+                // $curl = curl_init();
+
+                // curl_setopt_array($curl, [
+                //     CURLOPT_URL => "https://service-chat.qontak.com/api/open/v1/broadcasts/whatsapp/direct",
+                //     CURLOPT_RETURNTRANSFER => true,
+                //     CURLOPT_ENCODING => "",
+                //     CURLOPT_MAXREDIRS => 10,
+                //     CURLOPT_TIMEOUT => 30,
+                //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+                //     CURLOPT_CUSTOMREQUEST => "POST",
+                //     CURLOPT_POSTFIELDS => json_encode([
+                //         'to_name' => 'UjiKIR',
+                //         'to_number' => $no_telp,
+                //         'message_template_id' => '0ffb59f8-16c0-4241-8ae9-ac128330a0ff',
+                //         'channel_integration_id' => '509f8fcb-b29e-47dc-be5b-875e7b74ad6d',
+                //         'language' => [
+                //             'code' => 'en'
+                //         ],
+                //         'parameters' => [
+                //             '' => ''
+                //         ]
+                //     ]),
+                //     CURLOPT_HTTPHEADER => [
+                //         "Authorization: Bearer on2HUkR9P6rJkaVDy0iSYuvjW6IMLucWO0B5vP3GLaU",
+                //         "Content-Type: application/json"
+                //     ],
+                // ]);
+
+                // $response = curl_exec($curl);
+                // $err = curl_error($curl);
+                // curl_close($curl);
+                // if ($err) {
+                //     $respon = "cURL Error #:" . $err;
+                // } else {
+                //     $respon =  $response;
+                // }
                 $file = Yii::getPathOfAlias('webroot') . '/log_wa.txt';
                 $text = file_get_contents($file);
-                $data = date('d/m/Y H:i:s') . " = " . $respon . "\n";
+                $data = date('d/m/Y H:i:s') . " = " . $response . "\n";
                 $text .= $data;
                 file_put_contents($file, $text);
 
