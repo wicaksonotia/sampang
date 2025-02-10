@@ -395,10 +395,14 @@ class EditbukuController extends Controller
         $merk_id = $_POST['merk'];
         $result_merk = MasterMerk::model()->findByPk($merk_id);
         $merk = $result_merk->vehicle_brand_name;
+        $tipe_nonfull = $_POST['tipe_nonfull'];
         $tipe_id = $_POST['tipe'];
         $result_tipe = MasterMerkTipe::model()->findByPk($tipe_id);
         $tipe = $result_tipe->vehicle_varian_type_name;
         $tipe_sub_id = MasterMerkTipeSub::model()->findByAttributes(array('vehicle_varian_type_id' => $tipe_id))->vehicle_varian_id;
+        if ($tipe_nonfull != '-' || !empty($tipe_nonfull)) {
+            $tipe = $tipe_nonfull;
+        }
         $pengimport = str_replace("'", "`", strtoupper($_POST['pengimport']));
         $isi_silinder = $_POST['isi_silinder'];
         $daya_motor = $_POST['daya_motor'];

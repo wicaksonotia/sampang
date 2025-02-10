@@ -148,7 +148,9 @@
      }}]
      ">
         <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-            <div class="col-lg-12 col-md-12 col-sm-12 no-padding" style="margin-bottom: 10px;">
+            <div class="col-lg-12 col-md-12 col-sm-12 no-pad
+            ding" style="margin-bottom: 10px;">
+                <?php echo CHtml::hiddenField('dialog_lulus_id', ''); ?>
                 <select id="choose_lulus_penguji" class="form-control">
                     <?php
                     // $penguji = Penguji::model()->findAll();
@@ -161,15 +163,32 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
-                <?php
-                // echo CHtml::hiddenField('dialog_lulus_url', '');
-                echo CHtml::hiddenField('dialog_lulus_id', '');
-                ?>
-                <!-- <select id="choose_posisi" class="form-control">
-                    <option value="kiri">Kiri</option>
-                    <option value="kanan">Kanan</option>
-                </select> -->
+        </div>
+    </div>
+    <div id="dlg_cetak_non_full" class="easyui-dialog" title="Cetak Hasil Uji Non-FullCycle" style="width: 400px; height: auto; padding: 10px;display: none" data-options="
+     iconCls: 'icon-print',
+     autoOpen: false,
+     buttons: [{
+     id: 'button_save_lulus',
+     text:'Kartu',
+     iconCls:'icon-save',
+     handler:function(){
+     submitLulusNonFull();
+     }}]
+     ">
+        <div class="col-lg-12 col-md-12 col-sm-12 no-padding">
+            <div class="col-lg-12 col-md-12 col-sm-12 no-padding" style="margin-bottom: 10px;">
+                <?php echo CHtml::hiddenField('dlg_cetak_non_full_id', ''); ?>
+                <select id="dlg_cetak_non_full_penguji" class="form-control">
+                    <?php
+                    $penguji = Penguji::model()->findAll();
+                    foreach ($penguji as $dataPenguji) :
+                    ?>
+                        <option value="<?php echo $dataPenguji->nrp; ?>">
+                            <?php echo $dataPenguji->nama; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
             </div>
         </div>
     </div>
@@ -223,23 +242,28 @@
             pageList: [15, 30, 50],
             columns: [
                 [
-                    <?php if (Yii::app()->user->isRole('Admin')) { ?> {
-                            field: 'banding_prauji',
-                            title: 'Prauji',
-                            width: 50,
-                            halign: 'center',
-                            align: 'center',
-                            formatter: bandingPraujiButton
-                        },
-                        {
-                            field: 'banding_pengukuran',
-                            title: 'Pengukuran',
-                            width: 50,
-                            halign: 'center',
-                            align: 'center',
-                            formatter: bandingPengukuranButton
-                        },
-                    <?php } ?> {
+                    <?php
+                    // if (Yii::app()->user->isRole('Admin')) { 
+                    ?>
+                    // {
+                    //     field: 'banding_prauji',
+                    //     title: 'Prauji',
+                    //     width: 50,
+                    //     halign: 'center',
+                    //     align: 'center',
+                    //     formatter: bandingPraujiButton
+                    // },
+                    // {
+                    //     field: 'banding_pengukuran',
+                    //     title: 'Pengukuran',
+                    //     width: 50,
+                    //     halign: 'center',
+                    //     align: 'center',
+                    //     formatter: bandingPengukuranButton
+                    // },
+                    <?php
+                    // } 
+                    ?> {
                         field: 'foto',
                         title: 'Foto',
                         width: 50,
@@ -255,6 +279,15 @@
                         halign: 'center',
                         align: 'center',
                         formatter: buttonCetak
+                    },
+                    {
+                        field: 'cetak_nonfull',
+                        width: 50,
+                        title: 'Cetak <br/> non Full',
+                        sortable: false,
+                        halign: 'center',
+                        align: 'center',
+                        formatter: buttonCetakNonFull
                     },
                     {
                         field: 'no_kendaraan',
@@ -363,6 +396,7 @@
         $(document).ready(function() {
             $('#dlg_no_surat').dialog('close');
             $('#dlg_cetak_hasil').dialog('close');
+            $('#dlg_cetak_non_full').dialog('close');
             $('#dlg_cetak_tl_dimensi').dialog('close');
             $('#dlg_lulus_sementara').dialog('close');
             $('#tgl_search').datepicker({
@@ -439,13 +473,26 @@
             var ltl = explode[0];
             var id = explode[1];
             var noSurat = explode[2];
-            var url = '';
             if (ltl == 'l') {
-                url = '<?php echo $this->createUrl('Printhasil/CetakLulus'); ?>';
                 button = '<button class="btn btn-success" type="button" onclick="buttonDialogPosisi(\'' + id + '\')"><span class="glyphicon glyphicon-duplicate"></span></button>';
             } else if (ltl == 'tl') {
-                url = '<?php echo $this->createUrl('Printhasil/CetakTidakLulus'); ?>';
+                var url = '<?php echo $this->createUrl('Printhasil/CetakTidakLulus'); ?>';
                 button = '<button class="btn btn-danger" type="button" onclick="buttonDialogNoSurat(\'' + url + '\', \'' + id + '\', \'' + noSurat + '\')"><span class="glyphicon glyphicon-duplicate"></span></button>';
+            } else {
+                button = "<button class='btn btn-default' type='button' disabled='disabled'><span class='glyphicon glyphicon-duplicate'></span></button>";
+            }
+            return button;
+        }
+
+        function buttonCetakNonFull(value) {
+            var button;
+            var explode = value.split('|');
+            var ltl = explode[0];
+            var id = explode[1];
+            var noSurat = explode[2];
+            var url = '';
+            if (ltl == 'l') {
+                button = '<button class="btn btn-success" type="button" onclick="buttonDialogNonFull(\'' + id + '\')"><span class="glyphicon glyphicon-duplicate"></span></button>';
             } else {
                 button = "<button class='btn btn-default' type='button' disabled='disabled'><span class='glyphicon glyphicon-duplicate'></span></button>";
             }
@@ -510,22 +557,29 @@
         // PROSES CETAK LULUS
         function buttonDialogPosisi(id) {
             $('#dialog_lulus_id').val(id);
+            $('#dlg_cetak_non_full').dialog('close');
             $('#dlg_cetak_hasil').dialog('open');
             $('#dlg_cetak_hasil').dialog('center');
         }
 
+        function buttonDialogNonFull(id) {
+            console.log(id);
+
+            $('#dlg_cetak_non_full_id').val(id);
+            $('#dlg_cetak_hasil').dialog('close');
+            $('#dlg_cetak_non_full').dialog('open');
+            $('#dlg_cetak_non_full').dialog('center');
+        }
+
         function submitLulus() {
-            var no_seri_kartu = $("#no_seri_kartu").val();
             var penguji = $("#choose_lulus_penguji option:selected").val();
             var id = $('#dialog_lulus_id').val();
-            var url = $('#dialog_lulus_url').val();
             $.ajax({
                 url: '<?php echo $this->createUrl('Printhasil/SaveCetakLulus'); ?>',
                 type: 'POST',
                 data: {
                     penguji: penguji,
                     id: id,
-                    no_seri_kartu: no_seri_kartu
                 },
                 success: function(data) {
                     $('#dlg_cetak_hasil').dialog('close');
@@ -533,6 +587,28 @@
                 },
                 error: function(data) {
                     $('#dlg_cetak_hasil').dialog('close');
+                    prosesSearch();
+                    return false;
+                }
+            });
+        }
+
+        function submitLulusNonFull() {
+            var penguji = $("#dlg_cetak_non_full_penguji option:selected").val();
+            var id = $('#dlg_cetak_non_full_id').val();
+            $.ajax({
+                url: '<?php echo $this->createUrl('Printhasil/SaveCetakLulusNonFull'); ?>',
+                type: 'POST',
+                data: {
+                    penguji: penguji,
+                    id: id,
+                },
+                success: function(data) {
+                    $('#dlg_cetak_non_full').dialog('close');
+                    prosesSearch();
+                },
+                error: function(data) {
+                    $('#dlg_cetak_non_full').dialog('close');
                     prosesSearch();
                     return false;
                 }

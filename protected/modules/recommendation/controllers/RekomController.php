@@ -40,6 +40,7 @@ class RekomController extends Controller
             $dataJson[] = array(
                 "id_kendaraan_rekom_print" => $p->id_kendaraan . "_" . $p->id_rekom . "_" . $dtRetribusi->id_uji,
                 "id_rekom_proses" => $p->id_rekom,
+                "id_rekom_sinkron" => $p->id_rekom,
                 "no_uji" => $dataKendaraan->no_uji,
                 "no_kendaraan" => $dataKendaraan->no_kendaraan,
                 "pemilik" => $dataKendaraan->nama_pemilik,
@@ -139,12 +140,13 @@ class RekomController extends Controller
         $data['pemilik_baru'] = $dtRekom->pemilik_baru;
         $data['alamat_baru'] = $dtRekom->alamat_baru;
         $data['id_provinsi_mutke'] = $dtRekom->id_provinsi_mutke;
-        $data['id_kota_mutke'] = $dtRekom->id_kota_mutke;
+        $data['id_kota_mutke'] = (int)$dtRekom->id_kota_mutke;
+
 
         //NUMPANG KELUAR;
         $data['numpang_keluar'] = $dtRekom->numke;
         $data['id_provinsi_numke'] = $dtRekom->id_provinsi_numke;
-        $data['id_kota_numke'] = $dtRekom->id_kota_numke;
+        $data['id_kota_numke'] = (int)$dtRekom->id_kota_numke;
 
         //MUTASI MASUK
         // $data['mutasi_masuk'] = $dtRekom->mutmasuk;
@@ -188,6 +190,7 @@ class RekomController extends Controller
             $checkbox_ubah_bentuk = true;
         }
         $id_rekom = $_POST['id_rekom'];
+        $id_kota_tujuan = 0;
 
         //mutasi keluar
         $nik_baru = $_POST['nik_baru'];
@@ -195,22 +198,25 @@ class RekomController extends Controller
         $alamat_baru = $_POST['alamat_baru'];
         $propinsi_mutke = '';
         $kota_mutke = '';
-        if (!empty($_POST['propinsi_mutke'])) {
-            $propinsi_mutke = $_POST['propinsi_mutke'];
-        }
+        // if (!empty($_POST['propinsi_mutke'])) {
+        //     $propinsi_mutke = $_POST['propinsi_mutke'];
+        // }
         if (!empty($_POST['kota_mutke'])) {
             $kota_mutke = $_POST['kota_mutke'];
+            $id_kota_tujuan = $kota_mutke;
         }
 
         //numpang keluar
         $propinsi_numke = '';
         $kota_numke = '';
-        if (!empty($_POST['propinsi_numke'])) {
-            $propinsi_numke = $_POST['propinsi_numke'];
-        }
+        // if (!empty($_POST['propinsi_numke'])) {
+        //     $propinsi_numke = $_POST['propinsi_numke'];
+        // }
         if (!empty($_POST['kota_numke'])) {
             $kota_numke = $_POST['kota_numke'];
+            $id_kota_tujuan = $kota_numke;
         }
+        $area_code = MasterArea::model()->findByPk($id_kota_tujuan)->area_code;
 
         //ubah bentuk
         $keterangan_ubah_bentuk = $_POST['keterangan_ubah_bentuk'];
@@ -232,10 +238,18 @@ class RekomController extends Controller
         //ubah bentuk
         $update->ket_ubah_bentuk = ucwords(strtolower($keterangan_ubah_bentuk));
         $update->ubhbentuk = $checkbox_ubah_bentuk;
+        $update->area_code = $area_code;
         $update->save();
+    }
 
-        // SEND KE KEMENTRIAN
-        if ($checkbox_mutke || $checkbox_numke) {
+    public function actionSinkronDataRekom()
+    {
+        $id_rekom = $_POST['id_rekom'];
+        $tblRekom = TblRekom::model()->findByPk($id_rekom);
+        if ($tblRekom->numke || $tblRekom->mutke) {
+            $tblKendaraan = TblKendaraan::model()->findByAttributes(array('id_kendaraan' => $tblRekom->id_kendaraan));
+            $status = $tblRekom->numke ? 5 : 6;
+            $area_code = $tblRekom->area_code;
             $options = array(
                 "http" => array(
                     "method" => "POST",
@@ -251,13 +265,12 @@ class RekomController extends Controller
                 'token' => $token,
                 'prefix' => $prefix,
                 'param' => array(
-                    'nouji' => '',
-                    'status_penerbitan' => $status_penerbitan,
-                    'area_code_tujuan' => '',
+                    'nouji' => $tblKendaraan->no_uji,
+                    'status_penerbitan' => $status,
+                    'area_code_tujuan' => $area_code
                 )
             );
-            $kirim = json_encode($data);
-            print($kirim);
+            // $kirim = json_encode($data);
             // $ch = curl_init($url);
             // curl_setopt($ch, CURLOPT_POSTFIELDS, $kirim);
             // curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
@@ -265,11 +278,9 @@ class RekomController extends Controller
             // $result = curl_exec($ch);
 
             // $array = json_decode(json_decode(json_encode($result), true), true);
-            // $status = $array['status'];
-            // if ($status) {
-            // } else {
-            //     echo $array['message'];
-            // }
+            echo "<pre>";
+            var_export($data);
+            echo "</pre>";
             // curl_close($ch);
         }
     }

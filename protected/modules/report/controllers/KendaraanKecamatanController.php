@@ -188,7 +188,7 @@ class KendaraanKecamatanController extends Controller
             if (strtotime(date('Y-m-d')) > strtotime($data->tgl_mati_uji)) {
                 $sheet->getStyle('A' . $baris . ':J' . $baris)->getFill()->setFillType(PHPExcel_Style_Fill::FILL_SOLID)->getStartColor()->setRGB('DEA8A8');
             }
-            $sheet->setCellValue("K" . $baris, $data->no_telp);
+            $sheet->setCellValue("K" . $baris, '`' . $data->no_telp);
             $baris++;
             $no++;
         endforeach;

@@ -80,7 +80,7 @@ $cs->registerScriptFile($baseJs . '/bootstrap-select.js', CClientScript::POS_END
         <div class="col-lg-12 col-md-12 col-sm-12 no-padding" style="margin-bottom: 10px;">
             <select id="choose_lulus_penguji" class="form-control">
                 <?php
-                $penguji = Penguji::model()->findAl();
+                $penguji = Penguji::model()->findAll();
                 foreach ($penguji as $dataPenguji) :
                 ?>
                     <option value="<?php echo $dataPenguji->nrp; ?>"><?php echo $dataPenguji->nama; ?></option>

@@ -61,9 +61,11 @@ function prosesRekom(value) {
       $("#nik_baru").val(data.nik_baru);
       $("#pemilik_baru").val(data.pemilik_baru);
       $("#alamat_baru").val(data.alamat_baru);
-      $("#propinsi_mutke").val(data.id_provinsi_mutke);
-      $("#propinsi_mutke").selectpicker("refresh");
-      setSelectProvinsi(data.id_kota_mutke, "mutke");
+      // $("#propinsi_mutke").val(data.id_provinsi_mutke);
+      // $("#propinsi_mutke").selectpicker("refresh");
+      // setSelectProvinsi(data.id_kota_mutke, "mutke");
+      $("#kota_mutke").val(data.id_kota_mutke);
+      $("#kota_mutke").selectpicker("refresh");
 
       //MUTASI MASUK
       // if (data.mutasi_masuk == true) {
@@ -83,9 +85,11 @@ function prosesRekom(value) {
       } else {
         $("#checkbox_numke").iCheck("uncheck");
       }
-      $("#propinsi_numke").val(data.id_provinsi_numke);
-      $("#propinsi_numke").selectpicker("refresh");
-      setSelectProvinsi(data.id_kota_numke, "numke");
+      // $("#propinsi_numke").val(data.id_provinsi_numke);
+      // $("#propinsi_numke").selectpicker("refresh");
+      // setSelectProvinsi(data.id_kota_numke, "numke");
+      $("#kota_numke").val(data.id_kota_numke);
+      $("#kota_numke").selectpicker("refresh");
 
       //UBAH BENTUK
       if (data.ubah_bentuk == true) {
@@ -110,19 +114,17 @@ function prosesRekom(value) {
   });
 }
 
-function submitFormRekom() {
-  var data = $("#formRekom").serialize();
-  $.messager.defaults.ok = "Ya";
-  $.messager.defaults.cancel = "Tidak";
+function sinkronRekom(value) {
   $.messager.confirm(
     "Confirm",
-    "Data akan langsung dikirim ke KEMENTRIAN, apakah anda yakin untuk proses?",
+    "Apakah anda yakin ingin sinkron?",
     function (r) {
       if (r) {
         $.ajax({
           type: "POST",
-          url: "Rekom/SaveRekom",
-          data: data,
+          url: "Rekom/SinkronDataRekom",
+          data: { id_rekom: value },
+          dataType: "JSON",
           beforeSend: function () {
             showlargeloader();
           },
@@ -137,6 +139,25 @@ function submitFormRekom() {
       }
     }
   );
+}
+
+function submitFormRekom() {
+  var data = $("#formRekom").serialize();
+  $.ajax({
+    type: "POST",
+    url: "Rekom/SaveRekom",
+    data: data,
+    beforeSend: function () {
+      showlargeloader();
+    },
+    success: function (data) {
+      hidelargeloader();
+    },
+    error: function () {
+      hidelargeloader();
+      return false;
+    },
+  });
 }
 
 function setSelectProvinsi(kota, pilihan) {

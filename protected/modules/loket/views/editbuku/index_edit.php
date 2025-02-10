@@ -229,8 +229,8 @@
                         echo CHtml::dropDownList('merk', '41', $type_list, array('class' => 'form-control selectpicker show-tick wajib-isi', 'data-live-search' => 'true', 'data-size' => '5', 'onchange' => 'selectBrandType()'));
                         ?>
                         <label for="tipe">Tipe Merk</label>
-                        <br />
-                        <span id="merk_tipe_lama">Data lama : </span>
+                        <!-- <br />
+                        <span id="merk_tipe_lama">Data lama : </span> -->
                         <?php
                         $criteria_tipe_merk = new CDbCriteria();
                         $criteria_tipe_merk->addCondition("vehicle_brand_id = '41'");
@@ -239,6 +239,8 @@
                         $type_list = CHtml::listData($tbl_vehicle_type_sub, 'vehicle_varian_type_id', 'vehicle_varian_type_name');
                         echo CHtml::dropDownList('tipe', '1284', $type_list, array('class' => 'form-control selectpicker show-tick wajib-isi', 'data-live-search' => 'true', 'data-size' => '5'));
                         ?>
+                        <label for="tipe">Tipe Merk Non-FullCycle</label>
+                        <?php echo CHtml::textField('tipe_nonfull', '-', array('class' => 'form-control wajib-isi text-besar')) ?>
                         <label for="pengimport">Pengimport / Pabrik</label>
                         <?php echo CHtml::textField('pengimport', '', array('class' => 'form-control text-besar')) ?>
                     </div>

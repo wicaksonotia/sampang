@@ -61,7 +61,7 @@
     //    $dataProses = VPrintHasil::model()->findByAttributes(array('id_hasil_uji' => $id));
     $dataHasilUji = TblHasilUji::model()->findByPk($id);
     $dataKendaraan = VKendaraan::model()->findByAttributes(array('id_kendaraan' => $dataHasilUji->id_kendaraan));
-    $dataPenguji = Penguji::model()->findByAttributes(array('nrp' => $nrp));
+    $dataPenguji = MasterEmployee::model()->findByAttributes(array('user_id' => $user_id));
     ?>
     <div id="header">
         <img style="position: absolute; margin-left: -120px" src="<?php echo Yii::app()->baseUrl . "/images/kota.png"; ?>" width="60px" />
@@ -163,8 +163,8 @@
                 <td align="center">
                     Sampang, <?php echo $hari = date('d') . " " . Yii::app()->params['bulanArrayInd'][date('n') - 1] . " " . date('Y'); ?><br />
                     Penguji<br /><br /><br /><br />
-                    <b><span class="nama_penguji_underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $dataPenguji->nama; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><br />
-                    NRP. <?php echo $nrp; ?>
+                    <b><span class="nama_penguji_underline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $dataPenguji->full_name; ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></b><br />
+                    NRP. <?php echo $dataPenguji->identity_number; ?>
                 </td>
             </tr>
         </table>
@@ -178,5 +178,4 @@
 </div>
 <script type="text/javascript">
     window.print();
-    setTimeout(window.close, 0);
 </script>

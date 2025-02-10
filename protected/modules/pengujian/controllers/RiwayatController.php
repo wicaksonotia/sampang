@@ -56,60 +56,60 @@ class RiwayatController extends Controller
         /**
          * REKOM
          */
-        $criteriaRekom = new CDbCriteria();
-        $criteriaRekom->addCondition("id_kendaraan = $id_kendaraan");
-        $criteriaRekom->addCondition("mutke = true or numke = true");
-        $resultRekom = TblRekom::model()->findAll($criteriaRekom);
+        // $criteriaRekom = new CDbCriteria();
+        // $criteriaRekom->addCondition("id_kendaraan = $id_kendaraan");
+        // $criteriaRekom->addCondition("mutke = true or numke = true");
+        // $resultRekom = TblRekom::model()->findAll($criteriaRekom);
 
-        $dataJsonRekom = array();
-        if (!empty($resultRekom)) {
-            foreach ($resultRekom as $p) {
-                $dataKendaraan = TblKendaraan::model()->findByAttributes(array('id_kendaraan' => $p->id_kendaraan));
-                $dtRetribusi = VValidasi::model()->findByAttributes(array('id_kendaraan' => $p->id_kendaraan, 'tgl_retribusi' => $p->tgl_rekom));
-                $provinsi_mutke = $p->id_provinsi_mutke;
-                $kota_mutke = $p->id_kota_mutke;
-                $provinsi_numke = $p->id_provinsi_numke;
-                $kota_numke = $p->id_kota_numke;
-                if ($p->mutke == true) {
-                    $provinsi = '';
-                    $kota = '';
-                    if (!empty($provinsi_mutke)) {
-                        $provinsi = MProvinsi::model()->findByPk($provinsi_mutke)->nama;
-                    }
-                    if (!empty($kota_mutke)) {
-                        $kota = MKota::model()->findByPk($kota_mutke)->nama;
-                    }
-                } else {
-                    $provinsi = '';
-                    $kota = '';
-                    if (!empty($provinsi_numke)) {
-                        $provinsi = MProvinsi::model()->findByPk($provinsi_numke)->nama;
-                    }
-                    if (!empty($kota_numke)) {
-                        $kota = MKota::model()->findByPk($kota_numke)->nama;
-                    }
-                }
+        // $dataJsonRekom = array();
+        // if (!empty($resultRekom)) {
+        //     foreach ($resultRekom as $p) {
+        //         $dataKendaraan = TblKendaraan::model()->findByAttributes(array('id_kendaraan' => $p->id_kendaraan));
+        //         $dtRetribusi = VValidasi::model()->findByAttributes(array('id_kendaraan' => $p->id_kendaraan, 'tgl_retribusi' => $p->tgl_rekom));
+        //         $provinsi_mutke = $p->id_provinsi_mutke;
+        //         $kota_mutke = $p->id_kota_mutke;
+        //         $provinsi_numke = $p->id_provinsi_numke;
+        //         $kota_numke = $p->id_kota_numke;
+        //         if ($p->mutke == true) {
+        //             $provinsi = '';
+        //             $kota = '';
+        //             if (!empty($provinsi_mutke)) {
+        //                 $provinsi = MProvinsi::model()->findByPk($provinsi_mutke)->nama;
+        //             }
+        //             if (!empty($kota_mutke)) {
+        //                 $kota = MKota::model()->findByPk($kota_mutke)->nama;
+        //             }
+        //         } else {
+        //             $provinsi = '';
+        //             $kota = '';
+        //             if (!empty($provinsi_numke)) {
+        //                 $provinsi = MProvinsi::model()->findByPk($provinsi_numke)->nama;
+        //             }
+        //             if (!empty($kota_numke)) {
+        //                 $kota = MKota::model()->findByPk($kota_numke)->nama;
+        //             }
+        //         }
 
-                $tgl_uji_rekom = empty($p->tgl_uji) ? date("d F Y", strtotime($p->tgl_rekom)) : date("d F Y", strtotime($p->tgl_uji));
-                $tgl_mati_uji_rekom = empty($p->mati_uji) ? '' : date("d F Y", strtotime($p->mati_uji));
-                $dataJsonRekom[] = array(
-                    "kartu_kuning" => "",
-                    "id_kendaraan" => "",
-                    "id_hasil_uji" => "",
-                    "bap" => "",
-                    "no_uji" => $dataKendaraan->no_uji,
-                    "no_kendaraan" => $dataKendaraan->no_kendaraan,
-                    "tgl_uji" => $tgl_uji_rekom,
-                    "mati_uji" => $tgl_mati_uji_rekom,
-                    "nama_penguji" => $p->penguji,
-                    "catatan" => "",
-                    "keterangan" => substr($dtRetribusi->nm_uji, 6),
-                    "kota" => $kota . ", " . $provinsi,
-                    "tgl" => date("Y-m-d", strtotime($p->tgl_rekom)),
-                    "edit" => $p->id_rekom
-                );
-            }
-        }
+        //         $tgl_uji_rekom = empty($p->tgl_uji) ? date("d F Y", strtotime($p->tgl_rekom)) : date("d F Y", strtotime($p->tgl_uji));
+        //         $tgl_mati_uji_rekom = empty($p->mati_uji) ? '' : date("d F Y", strtotime($p->mati_uji));
+        //         $dataJsonRekom[] = array(
+        //             "kartu_kuning" => "",
+        //             "id_kendaraan" => "",
+        //             "id_hasil_uji" => "",
+        //             "bap" => "",
+        //             "no_uji" => $dataKendaraan->no_uji,
+        //             "no_kendaraan" => $dataKendaraan->no_kendaraan,
+        //             "tgl_uji" => $tgl_uji_rekom,
+        //             "mati_uji" => $tgl_mati_uji_rekom,
+        //             "nama_penguji" => $p->penguji,
+        //             "catatan" => "",
+        //             "keterangan" => substr($dtRetribusi->nm_uji, 6),
+        //             "kota" => $kota . ", " . $provinsi,
+        //             "tgl" => date("Y-m-d", strtotime($p->tgl_rekom)),
+        //             "edit" => $p->id_rekom
+        //         );
+        //     }
+        // }
 
         $dataJsonBerkala = array();
         if (!empty($result)) {
@@ -133,16 +133,16 @@ class RiwayatController extends Controller
             }
         }
 
-        $array_merge = array_merge($dataJsonRekom, $dataJsonBerkala);
-        array_multisort(array_map(function ($element) {
-            return $element['tgl'];
-        }, $array_merge), SORT_DESC, $array_merge);
+        // $array_merge = array_merge($dataJsonRekom, $dataJsonBerkala);
+        // array_multisort(array_map(function ($element) {
+        //     return $element['tgl'];
+        // }, $array_merge), SORT_DESC, $array_merge);
 
         header('Content-Type: application/json');
         echo CJSON::encode(
             array(
                 'total' => VRiwayat::model()->count($criteria),
-                'rows' => $array_merge,
+                'rows' => $dataJsonBerkala,
                 'id_kendaraan' => $id_kendaraan,
             )
         );

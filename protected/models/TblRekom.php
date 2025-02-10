@@ -32,51 +32,56 @@
  * @property string $no_rekom_mutmasuk
  * @property string $tgl_rekom_mutmas
  */
-class TblRekom extends CActiveRecord {
+class TblRekom extends CActiveRecord
+{
 
     /**
      * @return string the associated database table name
      */
-    public function tableName() {
+    public function tableName()
+    {
         return 'tbl_rekom';
     }
 
-    public function primaryKey() {
+    public function primaryKey()
+    {
         return 'id_rekom';
     }
 
     /**
      * @return array validation rules for model attributes.
      */
-    public function rules() {
+    public function rules()
+    {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
             array('no_surat_mutke, no_surat_numke, no_surat', 'numerical', 'integerOnly' => true),
-            array('pemilik_baru, nik_baru', 'length', 'max' => 100),
+            array('pemilik_baru, nik_baru, area_code', 'length', 'max' => 100),
             array('id_provinsi_mutke, id_provinsi_mutmas, id_provinsi_numke', 'length', 'max' => 2),
             array('id_kota_mutke, id_kota_mutmas, id_kota_numke', 'length', 'max' => 4),
             array('id_kendaraan, tgl_rekom, alamat_baru, id_riwayat, id_retribusi, mutke, numke, mutmasuk, ubhsifat, ubhbentuk, uji_pertama, ket_ubah_sifat, ket_ubah_bentuk, no_rekom_mutmasuk, tgl_rekom_mutmas', 'safe'),
             // The following rule is used by search().
             // @todo Please remove those attributes that should not be searched.
-            array('id_kendaraan, tgl_rekom, pemilik_baru, alamat_baru, id_riwayat, id_retribusi, mutke, numke, mutmasuk, ubhsifat, ubhbentuk, id_provinsi_mutke, id_kota_mutke, id_rekom, nik_baru, uji_pertama, ket_ubah_sifat, ket_ubah_bentuk, no_surat_mutke, no_surat_numke, no_surat, id_provinsi_mutmas, id_kota_mutmas, id_provinsi_numke, id_kota_numke, no_rekom_mutmasuk, tgl_rekom_mutmas', 'safe', 'on' => 'search'),
+            array('id_kendaraan, tgl_rekom, pemilik_baru, alamat_baru, id_riwayat, id_retribusi, mutke, numke, mutmasuk, ubhsifat, ubhbentuk, id_provinsi_mutke, id_kota_mutke, id_rekom, nik_baru, uji_pertama, ket_ubah_sifat, ket_ubah_bentuk, no_surat_mutke, no_surat_numke, no_surat, id_provinsi_mutmas, id_kota_mutmas, id_provinsi_numke, id_kota_numke, no_rekom_mutmasuk, tgl_rekom_mutmas, area_code', 'safe', 'on' => 'search'),
         );
     }
 
     /**
      * @return array relational rules.
      */
-    public function relations() {
+    public function relations()
+    {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
-        return array(
-        );
+        return array();
     }
 
     /**
      * @return array customized attribute labels (name=>label)
      */
-    public function attributeLabels() {
+    public function attributeLabels()
+    {
         return array(
             'id_kendaraan' => 'Id Kendaraan',
             'tgl_rekom' => 'Tgl Rekom',
@@ -105,6 +110,7 @@ class TblRekom extends CActiveRecord {
             'id_kota_numke' => 'Id Kota Numke',
             'no_rekom_mutmasuk' => 'No Rekom Mutmasuk',
             'tgl_rekom_mutmas' => 'Tgl Rekom Mutmas',
+            'area_code' => 'Area Code',
         );
     }
 
@@ -120,7 +126,8 @@ class TblRekom extends CActiveRecord {
      * @return CActiveDataProvider the data provider that can return the models
      * based on the search/filter conditions.
      */
-    public function search() {
+    public function search()
+    {
         // @todo Please modify the following code to remove attributes that should not be searched.
 
         $criteria = new CDbCriteria;
@@ -152,6 +159,7 @@ class TblRekom extends CActiveRecord {
         $criteria->compare('id_kota_numke', $this->id_kota_numke, true);
         $criteria->compare('no_rekom_mutmasuk', $this->no_rekom_mutmasuk, true);
         $criteria->compare('tgl_rekom_mutmas', $this->tgl_rekom_mutmas, true);
+        $criteria->compare('area_code', $this->area_code, true);
 
         return new CActiveDataProvider($this, array(
             'criteria' => $criteria,
@@ -164,8 +172,8 @@ class TblRekom extends CActiveRecord {
      * @param string $className active record class name.
      * @return TblRekom the static model class
      */
-    public static function model($className = __CLASS__) {
+    public static function model($className = __CLASS__)
+    {
         return parent::model($className);
     }
-
 }

@@ -111,8 +111,9 @@
             $id_provinsi = $dataRekom->id_provinsi_numke;
             $id_kota = $dataRekom->id_kota_numke;
         }
-        $mProv = MProvinsi::model()->findByAttributes(array('id_provinsi' => $id_provinsi));
-        $mKota = MKota::model()->findByAttributes(array('id_kota' => $id_kota));
+        // $mProv = MProvinsi::model()->findByAttributes(array('id_provinsi' => $id_provinsi));
+        // $mKota = MKota::model()->findByAttributes(array('id_kota' => $id_kota));
+        $kota_tujuan = MasterArea::model()->findByAttributes(array('area_id' => $id_kota));
         ?>
         <div id="header">
             <img id="logo" src="<?php echo Yii::app()->baseUrl . "/images/kota.png"; ?>" width="85px" />
@@ -164,17 +165,22 @@
                         <td>Kepada,</td>
                     </tr>
                     <tr>
+                        <td>Yth. Kepala <?php echo ucwords(strtolower($kota_tujuan->area_name)); ?></td>
+                    </tr>
+                    <!-- <tr>
                         <td>Yth. Kepala Dinas Perhubungan</td>
                     </tr>
                     <tr>
-                        <td><?php echo ucwords(strtolower($mKota->nama)); ?></td>
+                        <td><?php // echo ucwords(strtolower($mKota->nama)); 
+                            ?></td>
                     </tr>
                     <tr>
                         <td>di,</td>
                     </tr>
                     <tr>
-                        <td><b><u><?php echo ucwords(strtolower($mKota->nama)); ?></u></b></td>
-                    </tr>
+                        <td><b><u><?php // echo ucwords(strtolower($mKota->nama)); 
+                                    ?></u></b></td>
+                    </tr> -->
                 </table>
             </div>
         </div>
@@ -272,7 +278,7 @@
 
         <?php if ($id_uji == 5) { ?>
             <div style="margin-left: 70px; margin-bottom: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sesuai dengan permohonan pemilik kendaraan tersebut, memenuhi syarat untuk dimutasi
-                ke Dinas Perhubungan <?php echo ucwords(strtolower($mKota->nama)) . ", " . ucwords(strtolower($mProv->nama)); ?> dengan pemilik baru : </div>
+                ke <?php echo ucwords(strtolower($kota_tujuan->area_name)); ?> dengan pemilik baru : </div>
             <table style="margin-left: 70px; margin-bottom: 10px;">
                 <tr>
                     <td width="200px">Nama</td>
@@ -287,7 +293,7 @@
             </table>
         <?php } else { ?>
             <div style="margin-left: 70px; margin-bottom: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Sesuai dengan permohonan pemilik,
-                kendaraan tersebut tidak keberatan diuji di Dinas Perhubungan <?php echo ucwords(strtolower($mKota->nama)) . ", " . ucwords(strtolower($mProv->nama)); ?>
+                kendaraan tersebut tidak keberatan diuji di <?php echo ucwords(strtolower($kota_tujuan->area_name)); ?>
                 untuk satu kali uji dan hasil pengujiannya segera dikirim ke Dinas Perhubungan Kabupaten Sampang, Jawa Timur</div>
         <?php } ?>
         <div style="margin-left: 70px; margin-bottom: 10px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Demikian disampaikan kepada saudara, untk mendapatkan penyelesaian lebih lanjut.</div>

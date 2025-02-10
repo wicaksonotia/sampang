@@ -250,7 +250,7 @@
                         <td>7.</td>
                         <td>Panjang Total</td>
                         <td class="center">:</td>
-                        <td><?php echo $dataKendaraan->dimpanjang; ?></td>
+                        <td><?php echo $dataKendaraan->ukuran_panjang; ?></td>
                         <td></td>
                         <td>e.</td>
                         <td colspan="3">Keterangan Lain</td>
@@ -260,7 +260,7 @@
                         <td>8.</td>
                         <td>Lebar Total</td>
                         <td class="center">:</td>
-                        <td><?php echo $dataKendaraan->dimlebar; ?></td>
+                        <td><?php echo $dataKendaraan->ukuran_lebar; ?></td>
                         <td></td>
                         <td></td>
                         <td>p1 / p2</td>
@@ -278,7 +278,7 @@
                         <td>9.</td>
                         <td>Tinggi Total</td>
                         <td class="center">:</td>
-                        <td><?php echo $dataKendaraan->dimtinggi; ?></td>
+                        <td><?php echo $dataKendaraan->ukuran_tinggi; ?></td>
                         <td></td>
                         <td></td>
                         <td>q/r</td>
@@ -371,21 +371,21 @@
                         <td>g.</td>
                         <td>Panjang</td>
                         <td class="center">:</td>
-                        <td><?php echo $dataKendaraan->ukuran_panjang; ?></td>
+                        <td><?php echo $dataKendaraan->dimpanjang; ?></td>
                     </tr>
                     <!--15-->
                     <tr>
                         <td>h.</td>
                         <td>Lebar</td>
                         <td class="center">:</td>
-                        <td><?php echo $dataKendaraan->ukuran_lebar; ?></td>
+                        <td><?php echo $dataKendaraan->dimlebar; ?></td>
                     </tr>
                     <!--16-->
                     <tr>
                         <td>i.</td>
                         <td>Tinggi</td>
                         <td class="center">:</td>
-                        <td><?php echo $dataKendaraan->ukuran_tinggi; ?></td>
+                        <td><?php echo $dataKendaraan->dimtinggi; ?></td>
                     </tr>
                 </table>
             </td>

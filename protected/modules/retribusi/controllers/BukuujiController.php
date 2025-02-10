@@ -220,29 +220,14 @@ class BukuujiController extends Controller
         $user_id = $_POST['penguji'];
         $dtHasilUji = VPrintHasil::model()->findByAttributes(array('id_hasil_uji' => $id));
         //PENGUJI
-        // $tblPenguji = Penguji::model()->findByAttributes(array('user_id' => $user_id));
-        // $nm_penguji = $tblPenguji['nama'];
-        // $jabatan = $tblPenguji['pangkat'];
-        // $jam_selesai = date('m/d/Y g:i:s A');
-        $id_petugasuji_new = 958;
-        $id_direktur_new = 867;
-        $id_kepaladinas_new = 917;
-        $today = date('Y-m-d');
-        //    ==============
-        //    CARA 1
-        //    ==============
-        $tgl_mati_uji = date('n/j/Y', strtotime('+6 month', strtotime($today)));
-        //    ==============
-        //    CARA 2
-        //    ==============
-        //    $tambah_tanggal = mktime(0,0,0,date('m')+6);
-        //    $tgl_mati_uji = date('n/j/Y',$tambah_tanggal);
-        //    ==============
-        //    CARA 3
-        //    ==============
-        //    $date = date_create($today);
-        //    date_add($date, date_interval_create_from_date_string('6 months'));
-        //    $tgl_mati_uji = date_format($date, 'n/j/Y');
+        $tblPenguji = MasterEmployee::model()->findByAttributes(array('user_id' => $user_id));
+        $nrp = $tblPenguji->identity_number;
+        $nm_penguji = $tblPenguji->full_name;
+        $jabatan = $tblPenguji->pangkat;
+        $id_petugasuji_new = $tblPenguji->user_id;
+        $id_direktur_new = MasterEmployee::model()->findByAttributes(array('job_name' => 'Direktur'))->user_id;
+        $id_kepaladinas_new = MasterEmployee::model()->findByAttributes(array('job_name' => 'Kepala Dinas'))->user_id;
+
         $kode_wilayah_asal = 'SMPNG';
         $data_area = MasterArea::model()->findByAttributes(array('area_code' => $kode_wilayah_asal));
         $area_from_id = $data_area->area_id;

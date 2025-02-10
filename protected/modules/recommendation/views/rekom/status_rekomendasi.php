@@ -64,22 +64,30 @@ $cs->registerScriptFile($path . '/js/recommendation.js', CClientScript::POS_END)
                             <?php echo CHtml::textField('pemilik_baru', '', array('class' => 'form-control text-besar')); ?>
                             <label for="alamat_baru">Alamat Baru</label>
                             <?php echo CHtml::textArea('alamat_baru', '', array('class' => 'form-control text-besar')) ?>
-                            <label for="propinsi">Provinsi</label>
+                            <label for="propinsi">Dishub Tujuan</label>
                             <?php
-                            $criteria_provinsi = new CDbCriteria();
-                            $criteria_provinsi->order = 'nama asc';
-                            $tbl_provinsi = MProvinsi::model()->findAll($criteria_provinsi);
-                            $type_list = CHtml::listData($tbl_provinsi, 'id_provinsi', 'nama');
-                            echo CHtml::dropDownList('propinsi_mutke', '', $type_list, array('class' => 'propinsi_mutke form-control selectpicker show-tick', 'data-live-search' => 'true', 'data-size' => '5', 'onchange' => "selectProvinsi('mutke')", 'empty' => ''));
+                            $criteria_wilayah = new CDbCriteria();
+                            // $criteria_wilayah->addNotInCondition('idx', array(12, 30, 145, 148, 149, 151));
+                            $criteria_wilayah->order = 'area_name asc';
+                            $tbl_wilayah = MasterArea::model()->findAll($criteria_wilayah);
+                            $type_wilayah = CHtml::listData($tbl_wilayah, 'area_id', 'area_name');
+                            echo CHtml::dropDownList('kota_mutke', '', $type_wilayah, array('class' => 'form-control selectpicker show-tick wajib-isi', 'data-live-search' => 'true', 'data-size' => '5', 'empty' => ''));
                             ?>
-                            <label for="kota">Kota</label>
+                            <!-- <label for="propinsi">Provinsi</label> -->
                             <?php
-                            $criteria_kota = new CDbCriteria();
-                            // $criteria_kota->addCondition("id_provinsi = '11'");
-                            $criteria_kota->order = 'nama asc';
-                            $tbl_kota = MKota::model()->findAll($criteria_kota);
-                            $type_list = CHtml::listData($tbl_kota, 'id_kota', 'nama');
-                            echo CHtml::dropDownList('kota_mutke', '', $type_list, array('class' => 'kota_mutke form-control selectpicker show-tick', 'data-live-search' => 'true', 'data-size' => '5', 'empty' => ''));
+                            // $criteria_provinsi = new CDbCriteria();
+                            // $criteria_provinsi->order = 'nama asc';
+                            // $tbl_provinsi = MProvinsi::model()->findAll($criteria_provinsi);
+                            // $type_list = CHtml::listData($tbl_provinsi, 'id_provinsi', 'nama');
+                            // echo CHtml::dropDownList('propinsi_mutke', '', $type_list, array('class' => 'propinsi_mutke form-control selectpicker show-tick', 'data-live-search' => 'true', 'data-size' => '5', 'onchange' => "selectProvinsi('mutke')", 'empty' => ''));
+                            ?>
+                            <!-- <label for="kota">Kota</label> -->
+                            <?php
+                            // $criteria_kota = new CDbCriteria();
+                            // $criteria_kota->order = 'nama asc';
+                            // $tbl_kota = MKota::model()->findAll($criteria_kota);
+                            // $type_list = CHtml::listData($tbl_kota, 'id_kota', 'nama');
+                            // echo CHtml::dropDownList('kota_mutke', '', $type_list, array('class' => 'kota_mutke form-control selectpicker show-tick', 'data-live-search' => 'true', 'data-size' => '5', 'empty' => ''));
                             ?>
                         </div>
                     </div>
@@ -93,25 +101,30 @@ $cs->registerScriptFile($path . '/js/recommendation.js', CClientScript::POS_END)
                             </div>
                         </div>
                         <div class="box-body">
-                            <!--<label for="no_surat">No Surat</label>-->
-                            <?php // echo CHtml::textField('no_surat_numke', '', array('class' => 'form-control text-besar', 'readonly' => true)); 
-                            ?>
-                            <label for="propinsi">Dari Provinsi</label>
+                            <label for="propinsi">Dishub Tujuan</label>
                             <?php
-                            $criteria_provinsi = new CDbCriteria();
-                            $criteria_provinsi->order = 'nama asc';
-                            $tbl_provinsi = MProvinsi::model()->findAll($criteria_provinsi);
-                            $type_list = CHtml::listData($tbl_provinsi, 'id_provinsi', 'nama');
-                            echo CHtml::dropDownList('propinsi_numke', '', $type_list, array('class' => 'propinsi_numke form-control selectpicker show-tick', 'data-live-search' => 'true', 'data-size' => '5', 'onchange' => "selectProvinsi('numke')", 'empty' => ''));
+                            $criteria_wilayah = new CDbCriteria();
+                            // $criteria_wilayah->addNotInCondition('idx', array(12, 30, 145, 148, 149, 151));
+                            $criteria_wilayah->order = 'area_name asc';
+                            $tbl_wilayah = MasterArea::model()->findAll($criteria_wilayah);
+                            $type_wilayah = CHtml::listData($tbl_wilayah, 'area_id', 'area_name');
+                            echo CHtml::dropDownList('kota_numke', '', $type_wilayah, array('class' => 'form-control selectpicker show-tick wajib-isi', 'data-live-search' => 'true', 'data-size' => '5', 'empty' => ''));
                             ?>
-                            <label for="kota">Dari Kota</label>
+                            <!-- <label for="propinsi">Dari Provinsi</label> -->
                             <?php
-                            $criteria_kota = new CDbCriteria();
-                            //                                $criteria_kota->addCondition("id_provinsi = '11'");
-                            $criteria_kota->order = 'nama asc';
-                            $tbl_kota = MKota::model()->findAll($criteria_kota);
-                            $type_list = CHtml::listData($tbl_kota, 'id_kota', 'nama');
-                            echo CHtml::dropDownList('kota_numke', '', $type_list, array('class' => 'kota_numke form-control selectpicker show-tick', 'data-live-search' => 'true', 'data-size' => '5', 'empty' => ''));
+                            // $criteria_provinsi = new CDbCriteria();
+                            // $criteria_provinsi->order = 'nama asc';
+                            // $tbl_provinsi = MProvinsi::model()->findAll($criteria_provinsi);
+                            // $type_list = CHtml::listData($tbl_provinsi, 'id_provinsi', 'nama');
+                            // echo CHtml::dropDownList('propinsi_numke', '', $type_list, array('class' => 'propinsi_numke form-control selectpicker show-tick', 'data-live-search' => 'true', 'data-size' => '5', 'onchange' => "selectProvinsi('numke')", 'empty' => ''));
+                            ?>
+                            <!-- <label for="kota">Dari Kota</label> -->
+                            <?php
+                            // $criteria_kota = new CDbCriteria();
+                            // $criteria_kota->order = 'nama asc';
+                            // $tbl_kota = MKota::model()->findAll($criteria_kota);
+                            // $type_list = CHtml::listData($tbl_kota, 'id_kota', 'nama');
+                            // echo CHtml::dropDownList('kota_numke', '', $type_list, array('class' => 'kota_numke form-control selectpicker show-tick', 'data-live-search' => 'true', 'data-size' => '5', 'empty' => ''));
                             ?>
                         </div>
                     </div>
@@ -254,6 +267,14 @@ $cs->registerScriptFile($path . '/js/recommendation.js', CClientScript::POS_END)
                     formatter: buttonProsesRekom
                 },
                 {
+                    field: 'id_rekom_sinkron',
+                    width: 50,
+                    title: 'Sinkron',
+                    align: 'center',
+                    sortable: false,
+                    formatter: buttonSinkronRekom
+                },
+                {
                     field: 'no_uji',
                     title: 'No Uji',
                     width: 80,
@@ -301,6 +322,12 @@ $cs->registerScriptFile($path . '/js/recommendation.js', CClientScript::POS_END)
     function buttonProsesRekom(value) {
         var button;
         button = '<button type="button" class="btn btn-info" onclick="prosesRekom(\'' + value + '\')"><span class="glyphicon glyphicon-random"></span></button>';
+        return button;
+    }
+
+    function buttonSinkronRekom(value) {
+        var button;
+        button = '<button type="button" class="btn btn-warning" onclick="sinkronRekom(\'' + value + '\')"><span class="glyphicon glyphicon-refresh"></span></button>';
         return button;
     }
 

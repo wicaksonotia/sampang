@@ -230,15 +230,18 @@ function prosesSearch(urlAct) {
           $("#propinsi_select").val(data.propinsi);
           $("#propinsi_select").selectpicker("refresh");
           setSelectProvinsi(data.kota, data.kecamatan, data.kelurahan);
+
           $("#awal_pemakaian").datepicker("setDate", data.awal_pemakaian);
           $("#tahun").val(data.tahun);
           $("#nomer_mesin").val(data.nomer_mesin);
           $("#nomer_chasis").val(data.nomer_chasis);
           $("#jenis_kendaraan").val(data.jenis_kendaraan);
           $("#status_kendaraan").val(data.status_kendaraan);
+
           $("#merk").val(data.merk);
           $("#merk").selectpicker("refresh");
-          $("#merk_tipe_lama").text("Data lama : " + data.tipe);
+          $("#tipe_nonfull").val(data.tipe);
+          // $("#merk_tipe_lama").text("Data lama : " + data.tipe);
           setSelectBrandType(data.vehicle_varian_type_id);
           $("#pengimport").val(data.pengimport);
           $("#isi_silinder").val(data.isi_silinder);

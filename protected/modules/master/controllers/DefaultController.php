@@ -456,4 +456,67 @@ class DefaultController extends Controller
         $data->merk = $merk;
         $data->save();
     }
+
+    /* =====================================================================
+     * TIPE
+      ===================================================================== */
+
+    public function actionTipeListGrid()
+    {
+        $tipe = strtolower($_POST['tipe']);
+        $page = isset($_POST['page']) ? intval($_POST['page']) : 1;
+        $rows = isset($_POST['rows']) ? intval($_POST['rows']) : 5;
+        $sort = isset($_POST['sort']) ? strval($_POST['sort']) : 'vehicle_varian_type_name';
+        $order = isset($_POST['order']) ? strval($_POST['order']) : 'desc';
+        $offset = ($page - 1) * $rows;
+
+        $criteria = new CDbCriteria();
+        $criteria->order = "$sort $order";
+        $criteria->limit = $rows;
+        $criteria->offset = $offset;
+        if (!empty($tipe)) {
+            $criteria->addCondition('lower(vehicle_varian_type_name) like \'%' . $tipe . '%\'');
+        }
+        $result = MasterMerkTipe::model()->findAll($criteria);
+        $dataJson = array();
+
+        foreach ($result as $p) {
+            $merk = MasterMerk::model()->findByPk($p->vehicle_brand_id)->vehicle_brand_name;
+            $dataJson[] = array(
+                "id_tipe" => $p->vehicle_varian_type_id . "|tipe",
+                "merk" => $merk,
+                "tipe" => $p->vehicle_varian_type_name
+            );
+        }
+        header('Content-Type: application/json');
+        echo json_encode(
+            array(
+                'total' => MasterMerkTipe::model()->count($criteria),
+                'rows' => $dataJson,
+            )
+        );
+        Yii::app()->end();
+    }
+
+    public function actionGetDetailEditTipe()
+    {
+        $id = $_POST['id'];
+        $result = MasterMerkTipe::model()->findByPk($id);
+        $data['id'] = $result->vehicle_varian_type_id;
+        $data['nama'] = $result->vehicle_varian_type_name;
+        echo json_encode($data);
+    }
+
+    public function actionSaveTipe()
+    {
+        $id = $_POST['id_tipe'];
+        $tipe = strtoupper($_POST['tipe']);
+        if (empty($id)) {
+            $data = new MasterMerkTipe();
+        } else {
+            $data = MasterMerkTipe::model()->findByPk($id);
+        }
+        $data->vehicle_varian_type_name = $tipe;
+        $data->save();
+    }
 }
