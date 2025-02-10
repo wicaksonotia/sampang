@@ -563,8 +563,6 @@
         }
 
         function buttonDialogNonFull(id) {
-            console.log(id);
-
             $('#dlg_cetak_non_full_id').val(id);
             $('#dlg_cetak_hasil').dialog('close');
             $('#dlg_cetak_non_full').dialog('open');

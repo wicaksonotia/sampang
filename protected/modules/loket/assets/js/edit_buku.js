@@ -552,7 +552,7 @@ function submitForm(urlAct) {
       $("#id_kendaraan").val(0);
       $("#karoseri_jenis_lama").text("Data lama : -");
       $("#nama_komersil_lama").text("Data lama : -");
-      $("#merk_tipe_lama").text("Data lama : -");
+      // $("#merk_tipe_lama").text("Data lama : -");
     },
     error: function () {
       hidelargeloader();

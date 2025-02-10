@@ -842,7 +842,6 @@ class PrinthasilController extends Controller
             $sqlPtgPrint = "update tbl_proses set ptgs_print_hasil='$username' where id_daftar=$dtHasilUji->id_daftar";
             Yii::app()->db->createCommand($sqlPtgPrint)->execute();
         }
-        $varNoUji = str_replace(' ', '', $dtHasilUji->no_uji);
 
         //PENGUJI
         $tblPenguji = Penguji::model()->findByAttributes(array('nrp' => $nrp));
@@ -893,11 +892,9 @@ class PrinthasilController extends Controller
         }
 
         //INSERT FOTO MENTAH
-        $asd = new CDbCriteria();
-        $asd->addCondition("REPLACE(nouji, ' ', '') = '$varNoUji'");
-        $cekFotoMentah = Fotomentah::model()->find($asd);
+        $cekFotoMentah = Fotomentah::model()->findByAttributes(array('nouji' => $dtHasilUji->no_uji));
         if (!empty($cekFotoMentah)) {
-            $sql = "UPDATE fotomentah SET fotodepanmentah = decode('$dtHasilUji->img_depan','base64'), fotobelakangmentah = decode('$dtHasilUji->img_belakang','base64'), fotokananmentah = decode('$dtHasilUji->img_kanan','base64'), fotokirimentah = decode('$dtHasilUji->img_kiri','base64'),nouji='$dtHasilUji->no_uji' WHERE REPLACE(nouji, ' ', '') = '$varNoUji'";
+            $sql = "UPDATE fotomentah SET fotodepanmentah = decode('$dtHasilUji->img_depan','base64'), fotobelakangmentah = decode('$dtHasilUji->img_belakang','base64'), fotokananmentah = decode('$dtHasilUji->img_kanan','base64'), fotokirimentah = decode('$dtHasilUji->img_kiri','base64'),nouji='$dtHasilUji->no_uji' WHERE nouji = '$dtHasilUji->no_uji'";
             Yii::app()->db->createCommand($sql)->execute();
         } else {
             $sql = "INSERT INTO fotomentah(nouji,fotodepanmentah,fotobelakangmentah,fotokananmentah,fotokirimentah) VALUES ('$dtHasilUji->no_uji',decode('$dtHasilUji->img_depan','base64'),decode('$dtHasilUji->img_belakang','base64'),decode('$dtHasilUji->img_kanan','base64'),decode('$dtHasilUji->img_kiri','base64'))";
@@ -929,6 +926,16 @@ class PrinthasilController extends Controller
         } elseif ($jenis_uji == 4) { // MUTASI MASUK
             $statuspenerbitan = 6;
             $kode_wilayah_asal = $dtRetribusi->wilayah_asal_kode;
+        } elseif ($jenis_uji == 3) { // rekom numpang keluar
+            $statuspenerbitan = 5;
+        } elseif ($jenis_uji == 5) { // rekom mutasi keluar
+            $statuspenerbitan = 6;
+        } elseif ($jenis_uji == 10) { // kartu rusak
+            $statuspenerbitan = 3;
+        } elseif ($jenis_uji == 11) { // kartu hilang
+            $statuspenerbitan = 4;
+        } else {
+            $statuspenerbitan = 1;
         }
 
         $jbki = '0';
@@ -1050,7 +1057,6 @@ class PrinthasilController extends Controller
         $tgluji = date('dmY', strtotime($dtHasilUji->tgl_uji));
         $arrDtPengujian = new CDbCriteria();
         $arrDtPengujian->addCondition("tgluji = '$tgluji'");
-        $arrDtPengujian->addCondition("REPLACE(nouji, ' ', '') = '$varNoUji'");
         $arrDtPengujian->addCondition("nouji = '$dtHasilUji->no_uji'");
         $cekDtPengujian = Datapengujian::model()->find($arrDtPengujian);
         $statuslulusuji = TRUE;
