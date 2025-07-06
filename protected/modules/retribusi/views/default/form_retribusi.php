@@ -11,6 +11,7 @@ $cs->registerCssFile($baseCss . '/jquery.fileuploader.css');
 $cs->registerScriptFile($baseJs . '/jquery.fileuploader.retribusi.js', CClientScript::POS_END);
 $cs->registerScriptFile($baseJs . '/jquery.fileuploader.min.js', CClientScript::POS_END);
 ?>
+<script src="https://cdn.jsdelivr.net/npm/recta/dist/recta.js"></script>
 <style>
     .input-group-btn select {
         border-color: #ccc;

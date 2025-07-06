@@ -70,24 +70,29 @@
                 height: 70px;
             }
 
-            /*                .watermarked {
-                                    position: relative;
-                                }
-                
-                                .watermarked:after {
-                                    content: "";
-                                    display: block;
-                                    width: 100%;
-                                    height: 100%;
-                                    position: absolute;
-                                    top: 0px;
-                                    left: 0px;
-                                    background-image: url("<?php echo Yii::app()->baseUrl . "/images/logo_dishub.png"; ?>");
-                                    background-size: 100px 100px;
-                                    background-position: 30px 30px;
-                                    background-repeat: no-repeat;
-                                    opacity: 0.7;
-                                }*/
+            /* #watermarked:after {
+                content: "";
+                display: block;
+                width: 100%;
+                height: 100%;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                background-image: url("<?php echo Yii::app()->baseUrl . "/images/dishub_2.png"; ?>");
+                background-size: 100px 100px;
+                background-position: 30px 30px;
+                background-repeat: no-repeat;
+                opacity: 0.7;
+            } */
+
+            #watermark img {
+                width: 50%;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                opacity: 0.1;
+            }
         }
     </style>
     <meta charset="utf-8">
@@ -99,7 +104,11 @@
 </head>
 
 <body>
-    <div class="pages watermarked">
+    <div class="pages">
+        <div id="watermark">
+            <img src="<?php echo Yii::app()->baseUrl;
+                        ?>/images/dishub_2.png">
+        </div>
         <?php
         $path = $this->module->assetsUrl;
         $dataRekom = TblRekom::model()->findByPk($id_rekom);
@@ -130,7 +139,7 @@
                     <tr>
                         <td>Nomor</td>
                         <td> : </td>
-                        <td>551/<?php echo ($id_uji == 5) ? $dataRekom->no_surat_mutke : $dataRekom->no_surat_numke; ?>/<?php echo ($id_uji == 5) ? 'MK' : 'NUK'; ?>/434.209/<?php echo date('Y'); ?></td>
+                        <td>500.11.4/<?php echo ($id_uji == 5) ? $dataRekom->no_surat_mutke : $dataRekom->no_surat_numke; ?>/<?php echo ($id_uji == 5) ? 'MK' : 'NUK'; ?>/434.209/<?php echo date('Y'); ?></td>
                     </tr>
                     <tr>
                         <td>Sifat</td>
@@ -303,7 +312,7 @@
             ?>
             <table style="margin-top: 10px; margin-right: 10px;">
                 <tr>
-                    <td align="center">
+                    <td>
                         <?php
                         if ($dtTtd->id_ttd == 1) {
                             echo "A.n. ";
@@ -313,7 +322,7 @@
                     </td>
                 </tr>
                 <tr>
-                    <td align="center">
+                    <td>
                         KABUPATEN SAMPANG
                     </td>
                 </tr>
@@ -321,7 +330,7 @@
                 if ($dtTtd->id_ttd == 1) {
                 ?>
                     <tr>
-                        <td align="center">
+                        <td>
                             <?php
                             echo $dtTtd->title_bag;
                             ?>
@@ -329,23 +338,23 @@
                     </tr>
                 <?php } ?>
                 <tr>
-                    <td align="center" class="ttd">
+                    <td class="ttd">
                         <!--<img id="ttd" src="<?php // echo Yii::app()->baseUrl . "/images/ttd_kadis.png";  
                                                 ?>" width="170px" />-->
                     </td>
                 </tr>
                 <tr>
-                    <td align="center"><b><u><?php echo $dtTtd->nama; ?></u></b></td>
+                    <td><b><u><?php echo $dtTtd->nama; ?></u></b></td>
                 </tr>
                 <tr>
-                    <td align="center">NIP. <?php echo $dtTtd->nip; ?></td>
+                    <td>NIP. <?php echo $dtTtd->nip; ?></td>
                 </tr>
             </table>
         </div>
     </div>
     <script type="text/javascript">
         window.print();
-        //            setTimeout(window.close, 0);
+        // setTimeout(window.close, 0);
     </script>
 </body>
 

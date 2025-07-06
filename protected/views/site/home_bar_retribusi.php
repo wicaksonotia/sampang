@@ -3,11 +3,9 @@
         $('#containerRetribusi').highcharts({
             title: {
                 text: '',
-                //                x: -20
             },
             subtitle: {
                 text: '',
-                //                x: -20
             },
             xAxis: {
                 categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
@@ -15,7 +13,7 @@
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Jumlah Retribusi'
+                    text: 'Jumlah Kendaraan'
                 }
             },
             plotOptions: {
@@ -49,13 +47,14 @@
                             <?php
                             for ($bln = 1; $bln <= 12; $bln++) :
                                 $criteria = new CDbCriteria();
+                                $criteria->select = 'SUM(jum_kend) as jum_kend';
                                 $criteria->addCondition("tahun =" . $tahun);
                                 $criteria->addCondition("bulan =" . $bln);
                                 $dataSum = VLapPad::model()->find($criteria);
                                 if (empty($dataSum)) {
                                     echo '0,';
                                 } else {
-                                    echo $dataSum->total . ', ';
+                                    echo $dataSum->jum_kend . ', ';
                                 }
                             endfor;
                             ?>

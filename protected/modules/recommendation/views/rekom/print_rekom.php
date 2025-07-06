@@ -91,7 +91,7 @@
         </div>
         <hr />
         <center><u>SURAT KETERANGAN</u><br />
-            <div id="no_surat">Nomor : 551/<?php echo $dataRekom->no_surat; ?>/UB/434.209/<?php echo date('Y'); ?></div>
+            <div id="no_surat">Nomor : 500.11.4/<?php echo $dataRekom->no_surat; ?>/UB/434.209/<?php echo date('Y'); ?></div>
         </center>
         <p></p>
         <p></p>

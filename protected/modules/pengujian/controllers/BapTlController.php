@@ -103,7 +103,7 @@ class BapTlController extends Controller
         $sheet->getStyle("A1")->applyFromArray($styleTengah);
 
         $sheet->mergeCells("A2:J2");
-        $sheet->setCellValue("A2", "DINAS PERHUBUNGAN KABUPATEN PAMEKASAN");
+        $sheet->setCellValue("A2", "DINAS PERHUBUNGAN KABUPATEN SAMPANG");
         $sheet->getStyle("A2")->applyFromArray($styleBold12);
         $sheet->getStyle("A2")->applyFromArray($styleTengah);
 

@@ -145,8 +145,24 @@ class SiteController extends Controller
         $totalTidakLulusU = TblDaftar::model()->totalKelulusanKendaraan('false', $tgl, 'true');
         $totalTidakLulusBu = TblDaftar::model()->totalKelulusanKendaraan('false', $tgl, 'false');
 
+        $tahun = date('Y');
+        $bulan = date('n');
+        $criteria = new CDbCriteria();
+        $criteria->select = 'SUM(jum_kend) as jum_kend';
+        $criteria->addCondition("tahun =" . $tahun);
+        $criteria->addCondition("bulan =" . $bulan);
+        $dataSumPerBulan = VLapPad::model()->find($criteria);
+        $totalKendaraanPerBulan = !empty($dataSumPerBulan) ? $dataSumPerBulan->jum_kend : 0;
+        $criteria = new CDbCriteria();
+        $criteria->select = 'SUM(jum_kend) as jum_kend';
+        $criteria->addCondition("tahun =" . $tahun);
+        $dataSumPerTahun = VLapPad::model()->find($criteria);
+        $totalKendaraanPerTahun = !empty($dataSumPerTahun) ? $dataSumPerTahun->jum_kend : 0;
+
         $this->render('index', array(
             //            'dataEmployee' => $employee,
+            'totalKendaraanPerBulan' => $totalKendaraanPerBulan,
+            'totalKendaraanPerTahun' => $totalKendaraanPerTahun,
             'year' => $year,
             'totalRetribusi' => number_format($totalRetribusi),
             'totalRetribusiBulan' => number_format($totalRetribusiBulan),
@@ -190,7 +206,8 @@ class SiteController extends Controller
         $no_hp = "";
         $id_kendaraan = "";
         foreach ($data_kendaraan as $data) :
-            if (($data['selisih'] <= 7) && (!empty($no_hp))) {
+            // if (($data['selisih'] <= 7) && (!empty($no_hp))) {
+            if ((!empty($no_hp))) {
                 $no_uji = $data['no_uji'];
                 $no_telp = $data['no_telp'];
                 $id_kendaraan = $data['id_kendaraan'];
@@ -205,10 +222,10 @@ class SiteController extends Controller
                     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
                     CURLOPT_CUSTOMREQUEST => "POST",
                     CURLOPT_POSTFIELDS => json_encode([
-                        'to_name' => $no_uji,
-                        'to_number' => $no_telp,
-                        'message_template_id' => '05d31848-260e-4a02-a798-5b68b2fb9e3d',
-                        'channel_integration_id' => '509f8fcb-b29e-47dc-be5b-875e7b74ad6d',
+                        'to_name' => 'kir2025',
+                        'to_number' => '6282135446417',
+                        'message_template_id' => '3c6ccf71-a489-405e-b030-66c227fc8484',
+                        'channel_integration_id' => '41fcc81d-e9bb-4ad4-895a-9c7debf18e7a',
                         'language' => [
                             'code' => 'en'
                         ],
@@ -234,55 +251,64 @@ class SiteController extends Controller
                 curl_close($curl);
 
                 if ($err) {
-                    $response =  "cURL Error #:" . $err;
+                    echo "cURL Error #:" . $err;
+                } else {
+                    echo $response;
                 }
-
-                // $curl = curl_init();
-
-                // curl_setopt_array($curl, [
-                //     CURLOPT_URL => "https://service-chat.qontak.com/api/open/v1/broadcasts/whatsapp/direct",
-                //     CURLOPT_RETURNTRANSFER => true,
-                //     CURLOPT_ENCODING => "",
-                //     CURLOPT_MAXREDIRS => 10,
-                //     CURLOPT_TIMEOUT => 30,
-                //     CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-                //     CURLOPT_CUSTOMREQUEST => "POST",
-                //     CURLOPT_POSTFIELDS => json_encode([
-                //         'to_name' => 'UjiKIR',
-                //         'to_number' => $no_telp,
-                //         'message_template_id' => '0ffb59f8-16c0-4241-8ae9-ac128330a0ff',
-                //         'channel_integration_id' => '509f8fcb-b29e-47dc-be5b-875e7b74ad6d',
-                //         'language' => [
-                //             'code' => 'en'
-                //         ],
-                //         'parameters' => [
-                //             '' => ''
-                //         ]
-                //     ]),
-                //     CURLOPT_HTTPHEADER => [
-                //         "Authorization: Bearer on2HUkR9P6rJkaVDy0iSYuvjW6IMLucWO0B5vP3GLaU",
-                //         "Content-Type: application/json"
-                //     ],
-                // ]);
-
-                // $response = curl_exec($curl);
-                // $err = curl_error($curl);
-                // curl_close($curl);
-                // if ($err) {
-                //     $respon = "cURL Error #:" . $err;
-                // } else {
-                //     $respon =  $response;
-                // }
                 $file = Yii::getPathOfAlias('webroot') . '/log_wa.txt';
                 $text = file_get_contents($file);
                 $data = date('d/m/Y H:i:s') . " = " . $response . "\n";
                 $text .= $data;
                 file_put_contents($file, $text);
 
-                $sql = "update tbl_kendaraan set stts_kirim_wa = true where id_kendaraan in ($id_kendaraan)";
-                Yii::app()->db->createCommand($sql)->execute();
+                // $sql = "update tbl_kendaraan set stts_kirim_wa = true where id_kendaraan in ($id_kendaraan)";
+                // Yii::app()->db->createCommand($sql)->execute();
             }
         endforeach;
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => "https://service-chat.qontak.com/api/open/v1/broadcasts/whatsapp/direct",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode([
+                'to_name' => 'kir2025',
+                'to_number' => '628983817203',
+                'message_template_id' => '3c6ccf71-a489-405e-b030-66c227fc8484',
+                'channel_integration_id' => '41fcc81d-e9bb-4ad4-895a-9c7debf18e7a',
+                'language' => [
+                    'code' => 'en'
+                ],
+                'parameters' => [
+                    'body' => [
+                        [
+                            'key' => '1',
+                            'value_text' => 'PKB Dishub Sampang',
+                            'value' => 'layanan_name'
+                        ]
+                    ]
+                ]
+            ]),
+            CURLOPT_HTTPHEADER => [
+                "Authorization: Bearer dQ134MyvSqKgBvUiNR2Buw5OIyxL98nSIFIq9XnXIM0",
+                "Content-Type: application/json"
+            ],
+        ]);
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            echo $response;
+        }
     }
 
     public function actionRuncronOri()

@@ -121,14 +121,14 @@ class ApiController extends Controller
         $array = json_decode(json_decode(json_encode($resultQris), true), true);
         $status = $array['status'];
         if ($status) {
-            $sql = "TRUNCATE TABLE master_dataissuanc";
+            $sql = "TRUNCATE TABLE master_dataissuance";
             Yii::app()->db->createCommand($sql)->execute();
             foreach ($array['data'] as $key => $value) {
                 $issuance_id = $value['issuance_id'];
                 $issuance_code = $value['issuance_code'];
                 $issuance_name = $value['issuance_name'];
                 $issuance_desc = $value['issuance_desc'];
-                $sql = "INSERT INTO master_dataissuanc VALUES('$issuance_id','$issuance_code','$issuance_name','$issuance_desc')";
+                $sql = "INSERT INTO master_dataissuance VALUES('$issuance_id','$issuance_code','$issuance_name','$issuance_desc')";
                 Yii::app()->db->createCommand($sql)->execute();
             }
             echo "<pre>";

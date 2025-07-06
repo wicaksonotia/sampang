@@ -242,11 +242,6 @@ class BukuujiController extends Controller
         if (empty($dtHasilUji->no_identitas)) {
             $noidentitaspemilik = NULL;
         }
-        $tglUji = date('dmY', strtotime($dtHasilUji->jdatang));
-        $arrDtPengujian = new CDbCriteria();
-        $arrDtPengujian->addCondition("tgluji = '$tglUji'");
-        $arrDtPengujian->addCondition("nouji = '$dtHasilUji->no_uji'");
-        $cekDtPengujian = Datapengujian::model()->find($arrDtPengujian);
         $alamat = ucwords(strtolower($dtHasilUji->alamat));
         $nosertifikatreg = $dtHasilUji->no_regis;
         $tglsertifikatreg = date('m/d/Y', strtotime($dtHasilUji->tgl_regis));
@@ -377,6 +372,7 @@ class BukuujiController extends Controller
         $arrDtPengujian = new CDbCriteria();
         $arrDtPengujian->addCondition("tgluji = '$tgluji'");
         $arrDtPengujian->addCondition("nouji = '$dtHasilUji->no_uji'");
+        $arrDtPengujian->addCondition("statuspenerbitan = '$statuspenerbitan'");
         $cekDtPengujian = Datapengujian::model()->find($arrDtPengujian);
         $statuslulusuji = TRUE;
         if (!empty($cekDtPengujian)) {

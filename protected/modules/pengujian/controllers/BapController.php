@@ -18,7 +18,7 @@ class BapController extends Controller
 
     public function actionReportRiwayatPemeriksaan()
     {
-        $id_hasil_uji = $_GET['id_hasil_uji'];
+        $id_hasil_uji = $_REQUEST['id_hasil_uji'];
         $data = VRiwayatHasil::model()->findByAttributes(array('id_hasil_uji' => $id_hasil_uji));
         Yii::import("ext.PHPExcel", TRUE);
         $xls = new PHPExcel();
@@ -97,7 +97,7 @@ class BapController extends Controller
         $sheet->getStyle("A1")->applyFromArray($styleTengah);
 
         $sheet->mergeCells("A2:J2");
-        $sheet->setCellValue("A2", "DINAS PERHUBUNGAN KABUPATEN PAMEKASAN");
+        $sheet->setCellValue("A2", "DINAS PERHUBUNGAN KABUPATEN SAMPANG");
         $sheet->getStyle("A2")->applyFromArray($styleBold12);
         $sheet->getStyle("A2")->applyFromArray($styleTengah);
 
@@ -146,25 +146,25 @@ class BapController extends Controller
         $sheet->getStyle("F6")->applyFromArray($styleTengah);
         $sheet->setCellValue("F7", "d.");
         $sheet->getStyle("F7")->applyFromArray($styleTengah);
-        //        $sheet->setCellValue("F8", "f.");
+        $sheet->setCellValue("F8", "f.");
         $sheet->getStyle("F8")->applyFromArray($styleTengah);
         $sheet->setCellValue("G6", "No Kendaraan");
         $sheet->getStyle("G6")->applyFromArray($styleTengahHorizontal);
         $sheet->setCellValue("G7", "No Chasis");
         $sheet->getStyle("G7")->applyFromArray($styleTengahHorizontal);
-        //        $sheet->setCellValue("G8", "Tgl TD / TL");
-        //        $sheet->getStyle("G8")->applyFromArray($styleTengahHorizontal);
+        $sheet->setCellValue("G8", "Tgl TD / TL");
+        $sheet->getStyle("G8")->applyFromArray($styleTengahHorizontal);
 
         $sheet->mergeCells("H6:J6");
         $sheet->mergeCells("H7:J7");
-        $sheet->mergeCells("F8:J8");
+        $sheet->mergeCells("H8:J8");
 
         $sheet->setCellValue("H6", ": " . $data->no_kendaraan);
         $sheet->getStyle("H6")->applyFromArray($styleTengahHorizontal);
         $sheet->setCellValue("H7", ": " . $data->no_chasis);
         $sheet->getStyle("H7")->applyFromArray($styleTengahHorizontal);
-        //        $sheet->setCellValue("H8", ": " . date("d F Y H:i:s A", strtotime($data->jdatang)));
-        //        $sheet->getStyle("H8")->applyFromArray($styleTengahHorizontal);
+        $sheet->setCellValue("H8", ": " . date("d F Y H:i:s A", strtotime($data->jdatang)));
+        $sheet->getStyle("H8")->applyFromArray($styleTengahHorizontal);
 
         /*
          * ===================================
@@ -221,43 +221,44 @@ class BapController extends Controller
         $sheet->getStyle("A14")->applyFromArray($styleTengah);
         $sheet->setCellValue("A15", "e.");
         $sheet->getStyle("A15")->applyFromArray($styleTengah);
-        $sheet->setCellValue("A19", "");
-        $sheet->getStyle("A19")->applyFromArray($styleTengah);
+        // $sheet->setCellValue("A19", "g.");
+        // $sheet->getStyle("A19")->applyFromArray($styleTengah);
         $sheet->setCellValue("B13", "Tgl Daftar");
         $sheet->getStyle("B13")->applyFromArray($styleTengahHorizontal);
         $sheet->setCellValue("B14", "Tgl Mati Uji");
         $sheet->getStyle("B14")->applyFromArray($styleTengahHorizontal);
-        $sheet->mergeCells("B15:E15");
-        $sheet->setCellValue("B15", "Dikuasakan Orang");
+        // $sheet->mergeCells("B15:E15");
+        $sheet->setCellValue("B15", "Petugas");
         $sheet->getStyle("B15")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("B16", "- Nomor KTP");
-        $sheet->getStyle("B16")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("B17", "- Nama");
-        $sheet->getStyle("B17")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("B18", "- Alamat");
-        $sheet->getStyle("B18")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("B19", "");
-        $sheet->getStyle("B19")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("B16", "- Nomor KTP");
+        // $sheet->getStyle("B16")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("B17", "- Nama");
+        // $sheet->getStyle("B17")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("B18", "- Alamat");
+        // $sheet->getStyle("B18")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("B19", "Nomor Berkas");
+        // $sheet->getStyle("B19")->applyFromArray($styleTengahHorizontal);
 
         $sheet->mergeCells("C13:E13");
         $sheet->mergeCells("C14:E14");
-        $sheet->mergeCells("C16:E16");
-        $sheet->mergeCells("C17:E17");
-        $sheet->mergeCells("C18:J18");
-        $sheet->mergeCells("C19:E19");
+        $sheet->mergeCells("C15:E15");
+        // $sheet->mergeCells("C16:E16");
+        // $sheet->mergeCells("C17:E17");
+        // $sheet->mergeCells("C18:J18");
+        // $sheet->mergeCells("C19:E19");
 
-        $sheet->setCellValue("C13", ": " . date("d F Y H:i:s A", strtotime($data->jdatang)));
+        $sheet->setCellValue("C13", ": " . date("d F Y", strtotime($data->tgl_retribusi)));
         $sheet->getStyle("C13")->applyFromArray($styleTengahHorizontal);
         $sheet->setCellValue("C14", ": " . date("d F Y", strtotime($data->tglmati)));
         $sheet->getStyle("C14")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("C16", ": -");
-        $sheet->getStyle("C16")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("C17", ": -");
-        $sheet->getStyle("C17")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("C18", ": -");
-        $sheet->getStyle("C18")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("C19", "");
-        $sheet->getStyle("C19")->applyFromArray($styleTengahHorizontal);
+        $sheet->setCellValue("C15", ": " . $data->ptgs_daftar);
+        // $sheet->getStyle("C16")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("C17", ": -");
+        // $sheet->getStyle("C17")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("C18", ": -");
+        // $sheet->getStyle("C18")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("C19", ": " . $data->no_berkas);
+        // $sheet->getStyle("C19")->applyFromArray($styleTengahHorizontal);
 
         //===================================
 
@@ -265,41 +266,50 @@ class BapController extends Controller
         $sheet->getStyle("F13")->applyFromArray($styleTengah);
         $sheet->setCellValue("F14", "d.");
         $sheet->getStyle("F14")->applyFromArray($styleTengah);
-        $sheet->setCellValue("F15", "f.");
-        $sheet->getStyle("F15")->applyFromArray($styleTengah);
-        $sheet->setCellValue("F19", "g.");
+        // $sheet->setCellValue("F15", "f.");
+        // $sheet->getStyle("F15")->applyFromArray($styleTengah);
+        // $sheet->setCellValue("F19", "h.");
         $sheet->getStyle("F19")->applyFromArray($styleTengah);
         $sheet->setCellValue("G13", "Diuji Untuk");
         $sheet->getStyle("G13")->applyFromArray($styleTengahHorizontal);
         $sheet->setCellValue("G14", "Tgl Uji");
         $sheet->getStyle("G14")->applyFromArray($styleTengahHorizontal);
-        $sheet->mergeCells("G15:J15");
-        $sheet->setCellValue("G15", "Dikuasakan Badan");
-        $sheet->getStyle("G15")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("G16", "- Nama Badan");
-        $sheet->getStyle("G16")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("G17", "- Pengurus");
-        $sheet->getStyle("G17")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("G19", "Petugas");
-        $sheet->getStyle("G19")->applyFromArray($styleTengahHorizontal);
+        // $sheet->mergeCells("G15:J15");
+        // $sheet->setCellValue("G15", "Dikuasakan Badan");
+        // $sheet->getStyle("G15")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("G16", "- Nama Badan");
+        // $sheet->getStyle("G16")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("G17", "- Pengurus");
+        // $sheet->getStyle("G17")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("G19", "Petugas");
+        // $sheet->getStyle("G19")->applyFromArray($styleTengahHorizontal);
 
         $sheet->mergeCells("H13:J13");
         $sheet->mergeCells("H14:J14");
-        $sheet->mergeCells("H16:J16");
-        $sheet->mergeCells("H17:J17");
-        $sheet->mergeCells("H19:J19");
+        // $sheet->mergeCells("H16:J16");
+        // $sheet->mergeCells("H17:J17");
+        // $sheet->mergeCells("H19:J19");
 
         $sheet->setCellValue("H13", ": " . $data->nm_uji);
         $sheet->getStyle("H13")->applyFromArray($styleTengahHorizontal);
         $sheet->setCellValue("H14", ": " . date("d F Y", strtotime($data->tgl_uji)));
         $sheet->getStyle("H14")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("H16", ": -");
-        $sheet->getStyle("H16")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("H17", ": -");
-        $sheet->getStyle("H17")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("H19", ": " . $data->ptgs_daftar);
-        $sheet->getStyle("H19")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("H16", ": -");
+        // $sheet->getStyle("H16")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("H17", ": ");
+        // $sheet->getStyle("H17")->applyFromArray($styleTengahHorizontal);
+        // $sheet->setCellValue("H19", ": " . $data->ptgs_daftar);
+        // $sheet->getStyle("H19")->applyFromArray($styleTengahHorizontal);
 
+        $sheet->getRowDimension(16)->setVisible(false);
+        $sheet->getRowDimension(17)->setVisible(false);
+        $sheet->getRowDimension(18)->setVisible(false);
+        $sheet->getRowDimension(19)->setVisible(false);
+        $sheet->getRowDimension(20)->setVisible(false);
+        $sheet->getRowDimension(21)->setVisible(false);
+        $sheet->getRowDimension(22)->setVisible(false);
+        $sheet->getRowDimension(23)->setVisible(false);
+        $sheet->getRowDimension(24)->setVisible(false);
         //======================================================================
 
         /*
@@ -319,7 +329,7 @@ class BapController extends Controller
         $sheet->getStyle("B21")->applyFromArray($styleTengahHorizontal);
         $sheet->setCellValue("B22", "- Denda");
         $sheet->getStyle("B22")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("B23", "- Bukti Lulus Uji");
+        $sheet->setCellValue("B23", "- Buku Uji");
         $sheet->getStyle("B23")->applyFromArray($styleTengahHorizontal);
         $sheet->setCellValue("B24", "  Total");
         $sheet->getStyle("B24")->applyFromArray($styleTengahHorizontal);
@@ -329,13 +339,14 @@ class BapController extends Controller
         $sheet->mergeCells("C23:E23");
         $sheet->mergeCells("C24:E24");
 
-        $sheet->setCellValue("C21", ": Rp." . number_format($data->b_daftar + $data->b_pertama + $data->b_jbb + $data->b_rekom, 0));
+        $sheet->setCellValue("C21", ": Rp." . number_format($data->b_berkala, 0));
         $sheet->getStyle("C21")->applyFromArray($styleTengahHorizontal);
         $sheet->setCellValue("C22", ": Rp." . number_format($data->b_tlt_uji, 0));
         $sheet->getStyle("C22")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("C23", ": Rp." . number_format($data->b_gnt_buku + $data->b_plat_uji + $data->b_tnd_samping, 0));
+        $sheet->setCellValue("C23", ": Rp." . number_format($data->b_buku, 0));
         $sheet->getStyle("C23")->applyFromArray($styleTengahHorizontal);
         $sheet->setCellValue("C24", ": Rp." . number_format($data->b_total));
+        // $sheet->setCellValue("C24", ": Rp.");
         $sheet->getStyle("C24")->applyFromArray($styleTengahHorizontal);
 
         //===================================
@@ -395,21 +406,21 @@ class BapController extends Controller
 
         $sheet->setCellValue("F26", "b.");
         $sheet->getStyle("F26")->applyFromArray($styleTengah);
-        $sheet->setCellValue("F27", "");
+        $sheet->setCellValue("F27", "d.");
         $sheet->getStyle("F27")->applyFromArray($styleTengah);
 
         $sheet->setCellValue("G26", "Jam Datang");
         $sheet->getStyle("G26")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("G27", "");
+        $sheet->setCellValue("G27", "Petugas");
         $sheet->getStyle("G27")->applyFromArray($styleTengahHorizontal);
 
 
         $sheet->mergeCells("H26:J26");
         $sheet->mergeCells("H27:J27");
 
-        $sheet->setCellValue("H26", ": " . date("h:i:s", strtotime($data->jproses)));
+        $sheet->setCellValue("H26", ": " . date("h:i:s", strtotime($data->jdatang)));
         $sheet->getStyle("H26")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("H27", "");
+        $sheet->setCellValue("H27", ": " . $data->ptgs_datang);
         $sheet->getStyle("H27")->applyFromArray($styleTengahHorizontal);
 
         //======================================================================
@@ -639,47 +650,47 @@ class BapController extends Controller
 
         $sheet->setCellValue("B56", "a. Gaya Pengereman Sumbu I");
         $sheet->getStyle("B56")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("E56", ": " . $data->selrem_sb1 . " Kg");
+        $sheet->setCellValue("E56", ": " . $data->selgaya1 . " %");
         $sheet->getStyle("E56")->applyFromArray($styleTengahHorizontal);
 
         $sheet->setCellValue("B57", "b. Selisih Gaya Pengereman Sumbu I");
         $sheet->getStyle("B57")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("E57", ": " . $data->selgaya . " %");
+        $sheet->setCellValue("E57", ": " . $data->selrem_sb1 . " Kg");
         $sheet->getStyle("E57")->applyFromArray($styleTengahHorizontal);
 
         $sheet->setCellValue("B58", "c. Gaya Pengereman Sumbu II");
         $sheet->getStyle("B58")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("E58", ": " . $data->selrem_sb2 . " Kg");
+        $sheet->setCellValue("E58", ": " . $data->selgaya2 . " %");
         $sheet->getStyle("E58")->applyFromArray($styleTengahHorizontal);
 
         $sheet->setCellValue("B59", "d. Selisih Gaya Pengereman Sumbu II");
         $sheet->getStyle("B59")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("E59", ": " . $data->selkirikanan . " %");
+        $sheet->setCellValue("E59", ": " . $data->selrem_sb2 . " Kg");
         $sheet->getStyle("E59")->applyFromArray($styleTengahHorizontal);
 
         $sheet->setCellValue("B60", "c. Gaya Pengereman Sumbu III");
         $sheet->getStyle("B60")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("E60", ": " . $data->selrem_sb3 . " Kg");
+        $sheet->setCellValue("E60", ": " . $data->selgaya3 . " %");
         $sheet->getStyle("E60")->applyFromArray($styleTengahHorizontal);
 
         $sheet->setCellValue("B61", "d. Selisih Gaya Pengereman Sumbu III");
         $sheet->getStyle("B61")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("E61", ": " . $data->selgaya3 . " %");
+        $sheet->setCellValue("E61", ": " . $data->selrem_sb3 . " Kg");
         $sheet->getStyle("E61")->applyFromArray($styleTengahHorizontal);
 
         $sheet->setCellValue("B62", "c. Gaya Pengereman Sumbu IV");
         $sheet->getStyle("B62")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("E62", ": " . $data->selrem_sb4 . " Kg");
+        $sheet->setCellValue("E62", ": " . $data->selgaya4 . " %");
         $sheet->getStyle("E62")->applyFromArray($styleTengahHorizontal);
 
         $sheet->setCellValue("B63", "d. Selisih Gaya Pengereman Sumbu IV");
         $sheet->getStyle("B63")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("E63", ": " . $data->selgaya4 . " %");
+        $sheet->setCellValue("E63", ": " . $data->selrem_sb4 . " Kg");
         $sheet->getStyle("E63")->applyFromArray($styleTengahHorizontal);
 
         $sheet->setCellValue("B64", "Hasil Uji Kendaraan");
         $sheet->getStyle("B64")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("E64", ": Lulus");
+        $sheet->setCellValue("E64", ": " . $data->lulus == true ? 'Lulus' : 'Tidak Lulus');
         $sheet->getStyle("E64")->applyFromArray($styleTengahHorizontal);
 
         $sheet->setCellValue("B65", "Penandatangan Buku Uji");
@@ -703,26 +714,19 @@ class BapController extends Controller
         $sheet->getStyle("A67")->applyFromArray($styleTengah);
         $sheet->setCellValue("A68", "c.");
         $sheet->getStyle("A68")->applyFromArray($styleTengah);
-        $sheet->setCellValue("A69", "e.");
-        $sheet->getStyle("A69")->applyFromArray($styleTengah);
 
         $sheet->setCellValue("B67", "Tgl Penyerahan");
         $sheet->getStyle("B67")->applyFromArray($styleTengahHorizontal);
         $sheet->setCellValue("B68", "Lama Proses");
         $sheet->getStyle("B68")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("B69", "Tgl Mati Uji 6 Bln Kedepan");
-        $sheet->getStyle("B69")->applyFromArray($styleTengahHorizontal);
 
         $sheet->mergeCells("C67:E67");
         $sheet->mergeCells("C68:E68");
-        $sheet->mergeCells("C69:E69");
 
         $sheet->setCellValue("C67", ": " . date("d F Y", strtotime($data->jselesai)));
         $sheet->getStyle("C67")->applyFromArray($styleTengahHorizontal);
         $sheet->setCellValue("C68", ": " . $data->lama . " menit");
         $sheet->getStyle("C68")->applyFromArray($styleTengahHorizontal);
-        $sheet->setCellValue("C69", ": " . date("d F Y", strtotime($data->tglmati6bln)));
-        $sheet->getStyle("C69")->applyFromArray($styleTengahHorizontal);
 
         //===================================
 
@@ -739,7 +743,6 @@ class BapController extends Controller
 
         $sheet->mergeCells("H67:J67");
         $sheet->mergeCells("H68:J68");
-        $sheet->mergeCells("F69:J69");
 
         $sheet->setCellValue("H67", ": " . date("h:i:s", strtotime($data->jselesai)));
         $sheet->getStyle("H67")->applyFromArray($styleTengahHorizontal);
@@ -755,13 +758,13 @@ class BapController extends Controller
                 )
             )
         );
-        $sheet->getStyle("A5:J69")->applyFromArray($styleArray);
+        $sheet->getStyle("A5:J68")->applyFromArray($styleArray);
         //======================================================================
 
         ob_clean();
         $tgl_sekarang = date('d-m-Y');
         header('Content-Type: application/vnd.ms-excel');
-        header('Content-Disposition: attachment;filename="riwayat_pemeriksaan[' . $data->no_uji . '].xls"');
+        header('Content-Disposition: attachment;filename="riwayat_pemeriksaan[' . $data->no_kendaraan . '].xls"');
         header('Set-Cookie: fileDownload=true; path=/');
         header('Cache-Control: max-age=0');
         header('Cache-Control: max-age=1');

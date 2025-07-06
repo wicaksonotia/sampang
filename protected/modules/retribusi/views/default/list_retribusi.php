@@ -210,6 +210,14 @@
                     align: 'center',
                     formatter: formatAction
                 },
+                {
+                    field: 'no_antrian',
+                    title: 'ANTRIAN',
+                    width: 60,
+                    halign: 'center',
+                    align: 'center',
+                    formatter: actionPrintAntrian
+                },
                 // {
                 //     field: 'delete',
                 //     title: 'Delete',
@@ -318,6 +326,11 @@
         },
         onLoadSuccess: function() {}
     });
+
+    function actionPrintAntrian(value) {
+        var button = '<button type="button" class="btn btn-danger edit-retribusi" onclick="printAntrian(\'' + value + '\')"><span class="glyphicon glyphicon-user"></span></button>';
+        return button;
+    }
 
     function formatAction(value) {
         var button = '<button type="button" class="btn btn-info edit-retribusi" onclick="buttonEditTerdaftar(\'' + value + '\')"><span class="glyphicon glyphicon-pencil"></span></button>';
@@ -587,5 +600,49 @@
             $.messager.alert('Warning', 'You must select at least one item!', 'error');
             return false;
         }
+    }
+
+    function printAntrian(value) {
+        var explode = value.split('_');
+        var nomor = explode[0];
+        var no_uji = explode[1];
+        var no_kendaraan = explode[2];
+        var d = new Date();
+        var month = d.getMonth() + 1;
+        var day = d.getDate();
+        var today =
+            (('' + day).length < 2 ? '0' : '') + day + '/' +
+            (('' + month).length < 2 ? '0' : '') + month + '/' +
+            d.getFullYear();
+        var printer = new Recta('123456789012', '1811')
+        // console.log(nomor)
+        printer.open().then(() => {
+            printer.align('center')
+                .text('UPTD PENGUJIAN')
+                .bold(true)
+                .text('KENDARAAN BERMOTOR')
+                .bold(true)
+                .text('KAB. SAMPANG')
+                .bold(true)
+            printer.linefeed(2)
+            printer.align('center')
+                .text('NO ANTRIAN')
+                .bold(false)
+            printer.linefeed(2)
+            printer.align('center')
+                .size(4, 4)
+                .text(nomor)
+                .bold(true)
+            printer.linefeed(2)
+            printer.align('center')
+                .text(no_uji)
+                .bold(false)
+                .text(no_kendaraan)
+                .bold(false)
+                .text(today)
+                .bold(false)
+            printer.cut(partial = true, linefeed = 3)
+                .print()
+        })
     }
 </script>

@@ -26,6 +26,12 @@ class DefaultController extends Controller
         ));
     }
 
+    public function actionPrint()
+    {
+        $this->layout = '//';
+        $this->render('print');
+    }
+
     public function actionIndexCoba()
     {
         $this->pageTitle = 'RETRIBUSI';
@@ -362,6 +368,7 @@ class DefaultController extends Controller
                 "id" => $p->id_retribusi,
                 "bap" => $p->id_retribusi . "_" . $p->id_kendaraan . "_" . $p->id_uji,
                 "ACTIONS" => $p->id_retribusi,
+                "no_antrian" => $p->numerator_hari . "_" . $p->no_uji . "_" . $p->no_kendaraan,
                 "delete" => $p->id_retribusi,
                 "idret_tglmati" => $p->id_retribusi . "_" . $tgl_mati . "_" . $p->id_jns_kend,
                 "id_retribusi" => $p->id_retribusi,

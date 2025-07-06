@@ -9,51 +9,39 @@ $cs->registerScriptFile($baseUrl . '/js/main.js', CClientScript::POS_END);
 <div class="row col-lg-12 col-xs-12" style="margin-top: 20px;">
     <div class="row">
         <div class="col-md-12">
-            <div class="col-lg-3 col-xs-6">
+            <div class="col-lg-4 col-xs-6">
                 <!-- small box -->
                 <div class="small-box bg-aqua">
                     <div class="inner">
-                        <h3 id="divTotalRetribusi"><?php echo $totalRetribusi ?></h3>
-                        <p>Retribusi/hari</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-cash"></i>
-                    </div>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-yellow">
-                    <div class="inner">
-                        <h3 id="divTotalRetribusi"><?php echo $totalRetribusiBulan ?></h3>
-                        <p>Retribusi/bulan</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-cash"></i>
-                    </div>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-maroon">
-                    <div class="inner">
-                        <h3 id="divTotalRetribusi"><?php echo $totalRetribusiTahun ?></h3>
-                        <p>Retribusi/tahun</p>
-                    </div>
-                    <div class="icon">
-                        <i class="ion ion-cash"></i>
-                    </div>
-                </div>
-            </div><!-- ./col -->
-            <div class="col-lg-3 col-xs-6">
-                <!-- small box -->
-                <div class="small-box bg-green">
-                    <div class="inner">
-                        <h3 id="total_kendaraan_atas"><?php echo $totalKendaraan; ?></h3>
+                        <h3 id="divTotalRetribusi"><?php echo $totalLulusU + $totalTidakLulusU + $totalLulusBu + $totalTidakLulusBu; ?></h3>
                         <p>Kendaraan/hari</p>
                     </div>
                     <div class="icon">
-                        <i class="ion ion-model-s"></i>
+                        <i class="ion ion-cash"></i>
+                    </div>
+                </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-yellow">
+                    <div class="inner">
+                        <h3 id="divTotalRetribusi"><?php echo $totalKendaraanPerBulan; ?></h3>
+                        <p>Kendaraan/bulan</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-cash"></i>
+                    </div>
+                </div>
+            </div><!-- ./col -->
+            <div class="col-lg-4 col-xs-6">
+                <!-- small box -->
+                <div class="small-box bg-maroon">
+                    <div class="inner">
+                        <h3 id="divTotalRetribusi"><?php echo $totalKendaraanPerTahun; ?></h3>
+                        <p>Kendaraan/tahun</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-cash"></i>
                     </div>
                 </div>
             </div><!-- ./col -->
@@ -65,7 +53,7 @@ $cs->registerScriptFile($baseUrl . '/js/main.js', CClientScript::POS_END);
     <section class="col-lg-8">
         <div class="box box-info">
             <div class="box-header with-border">
-                <h3 class="box-title">Retribusi</h3>
+                <h3 class="box-title">Kendaraan</h3>
                 <div class="box-tools pull-right">
                     <!--<span class="label label-danger">8 New Members</span>-->
                     <button class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
